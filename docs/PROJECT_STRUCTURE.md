@@ -1,44 +1,49 @@
 # TNYX Project Structure
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Date:** May 2026  
 **Architecture:** Monorepo (Flutter + Python)
 
 TNYX ek Adaptive AI Health Operating System hai jo multiple platforms pe kaam karega.
 
+> Note: GitHub repo name `tnyx-ai` ho sakta hai, lekin local monorepo root folder ko aap `tnyx/` rakh sakte ho. Docs mein hum logical structure ko refer kar rahe hain.
+
 ## Root Folder Structure
 
 ```bash
-tnyx-ai/                          # Monorepo Root
+tnyx/                             # Monorepo Root (repo: tnyx-ai)
 ├── apps/                         # All Applications
-│   ├── tnyx_mobile/              # Main Flutter App (Android + iOS)
-│   ├── tnyx_web/                 # User Website (Flutter Web)
-│   ├── tnyx_admin/               # Admin Dashboard
-│   └── tnyx_watch/               # Wear OS Watch App
+│   ├── mobile/                   # Main Flutter App (Android + iOS)
+│   ├── web/                      # User Website (Flutter Web)
+│   ├── admin/                    # Admin Dashboard
+│   └── watch/                    # Wear OS Watch App
 │
 ├── backend/                      # Python FastAPI Backend
-│
 ├── packages/                     # Shared Packages (Code Reuse)
-│
 ├── docs/                         # All Documentation
-│
 ├── infra/                        # Infrastructure & Deployment
 ├── scripts/                      # Utility Scripts
 ├── .github/                      # CI/CD Workflows
 ├── melos.yaml                    # Monorepo Management (Flutter)
 ├── README.md
 ├── MASTER_EXECUTION_PLAN.md
-├── PROJECT_STRUCTURE.md          # Yeh File
 └── .gitignore
 ```
 
+## Naming Clarification (Important)
+
+- **Folder names** (`apps/mobile`) ko simple rakho, kyunki ye monorepo navigation aur tooling (melos) ke liye readable hota hai.
+- **Flutter pubspec name** (e.g., `name: tnyx_mobile`) Dart package identifier hota hai, folder name nahi. Monorepo mein multiple apps/pkgs honge, isliye `tnyx_mobile` jaisa unique name practical hota hai.
+- **App identity** (Android `applicationId`, iOS bundle id) alag cheez hai, jo later production ke time set hogi.
+
 ## 1) Apps Folder (Detailed)
 
-### `apps/tnyx_mobile/` (Primary App)
+### `apps/mobile/` (Primary App)
 
 ```bash
-tnyx_mobile/
+mobile/
 ├── lib/
+│   ├── app/                  # App entry wiring (MaterialApp, etc.)
 │   ├── core/                 # Theme, DI, Routes, Config, Utils
 │   ├── features/             # Feature-wise modules
 │   │   ├── nutrition/
@@ -50,7 +55,7 @@ tnyx_mobile/
 │   │   ├── profile/
 │   │   └── ...
 │   ├── shared/               # Shared widgets, models, extensions
-│   ├── wear/                 # Wear OS specific logic
+│   ├── wear/                 # Wear OS specific logic (if needed)
 │   └── main.dart
 ├── assets/
 │   ├── images/
@@ -60,15 +65,15 @@ tnyx_mobile/
 └── pubspec.yaml
 ```
 
-### `apps/tnyx_web/`
+### `apps/web/`
 
 Flutter Web (User Facing Website)
 
-### `apps/tnyx_admin/`
+### `apps/admin/`
 
 Admin Panel (Next.js ya Flutter Web)
 
-### `apps/tnyx_watch/`
+### `apps/watch/`
 
 Wear OS Companion App
 
@@ -127,5 +132,5 @@ docs/
 ## Notes
 
 - Maximum code sharing `packages/` ke through.
-- `apps/tnyx_mobile/` ko sabse zyada priority dena hai.
+- `apps/mobile/` ko sabse zyada priority dena hai.
 - Global support (i18n, multi-region food DB, Metric/Imperial) abhi se consider karna hai.
