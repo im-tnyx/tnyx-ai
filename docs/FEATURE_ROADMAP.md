@@ -20,6 +20,8 @@ Current focus:
 
 TNYX is an adaptive health, fitness, nutrition, recovery, and coaching ecosystem.
 
+It is intended to evolve into an **Adaptive AI Health OS** where coaching is personalized, explainable, and safety-guarded.
+
 Long-term platform scope:
 
 - mobile apps
@@ -137,33 +139,61 @@ During v0.1:
 
 No service work is required before this milestone is complete.
 
-## 6) Post UI Foundation Roadmap
+## 6) Post UI Foundation Roadmap (Staged Intelligence)
 
-### v0.2
+### v0.2 - Core Data + Identity + Consent (Foundation)
 
 - service contracts baseline
-- identity/access integration
+- identity/access integration (contract-first)
 - persistence baseline
+- consent model baseline (what data is collected, why, user controls)
 
-### v0.3
+### v0.3 - Deterministic Coach + Safety (Rules First)
 
-- adaptive coaching integration
-- nutrition capability rollout
-- external data synchronization
+- deterministic coaching outputs (rules-based)
+- nutrition capability v1
+- training capability v1
+- recovery scoring v1
+- safety filter baseline and escalation language
 
-### v0.4
+### v0.4 - Memory + Explainability + Wearables Baseline
 
-- subscriptions
-- realtime capability
-- notification intelligence
+- memory policy (auditable facts, user-visible/deletable)
+- explanation format maturity (why + confidence)
+- external data synchronization baseline (provider choice deferred)
+- admin console foundation (optional, if required for ops)
 
-### v1.0
+### v0.5 - Multimodal Logging + Realtime Coaching Loop
 
-- production release hardening
+- barcode logging
+- voice logging
+- camera logging (staged; privacy and accuracy-first)
+- realtime session capability (live coaching surfaces)
+- notification intelligence (as needed)
+
+### v1.0 - Adaptive Health OS Release Hardening
+
+- autonomous adaptation (calories, deload/refeed) with safety gating
 - analytics maturity
-- scale and optimization
+- scale, performance, and reliability
 
-## 7) Documentation Status
+## 7) Multimodal Food Logging Rollout (Policy)
+
+Multimodal input is staged to protect reliability and user trust:
+
+1. text-first logging
+2. barcode scanning
+3. voice + text hybrid
+4. image logging
+5. OCR nutrition label reading (last; accuracy validation required)
+
+## 8) Wearables & External Data Integration (Policy)
+
+- ingestion must be provider-agnostic via normalized contracts
+- define conflict resolution rules (multiple sources, missing data)
+- explicit user consent for each external source and data category
+
+## 9) Documentation Status
 
 Core v0.1 docs include:
 
@@ -181,7 +211,7 @@ Primary execution authority:
 
 - root `MASTER_EXECUTION_PLAN.md`
 
-## 8) Execution Rule
+## 10) Execution Rule
 
 Current path:
 
