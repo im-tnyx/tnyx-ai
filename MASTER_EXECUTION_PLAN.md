@@ -2,82 +2,69 @@
 
 This document is the single execution reference for TNYX.
 
-It translates product vision into build order, architecture boundaries, and release gates.
+It translates product vision into build order, domain boundaries, and release gates.
+
+> **Policy:** This plan is **technology-agnostic**. It must not commit to any specific programming language, framework, repository structure, vendor integration, or infrastructure tooling.
 
 ## 1) Product Definition
 
-TNYX is an AI-first adaptive health platform, not a basic tracker.
+TNYX is an adaptive health platform, not a basic tracker.
 
 Long-term system scope:
 
 - nutrition intelligence
-- workout intelligence
+- training intelligence
 - recovery and stress intelligence
 - wearable-aware adaptation
-- multimodal AI coaching
-- memory-driven personalization
+- coaching workflows (adaptive over time)
+- memory-driven personalization (auditable, user-controlled)
 
 ## 2) Current Reality (As-Is)
 
-Current repository status:
+Current status:
 
-- docs foundation created
-- Expo mobile UI shell running
-- theme/language/font foundation in place
-- custom tab + top bar prototypes in progress
+- documentation foundation created
+- client UI shell and core UX foundations in progress
+- theme/typography foundations in place
+- navigation prototypes in progress
 - mock-data-first approach active
 
-Current deliberate constraints:
+Current deliberate constraints (by design):
 
-- no backend integration
-- no production auth implementation
-- no DB integration
-- no AI orchestration wiring
-- no realtime/wearable sync
+- no production data integration
+- no production identity/access implementation
+- no persistence layer integration
+- no adaptive intelligence wiring
+- no realtime synchronization
 
 ## 3) Target Architecture (To-Be)
 
-Execution model:
+Execution model (principles):
 
-- Turborepo monorepo
-- modular monolith first
-- event-driven domain integration
-- selective service extraction later
+- modular boundaries with clear ownership
+- layered domain design (client, service, and domain rules separated)
+- standardized domain contracts and message formats
+- scalable inter-module communication (pattern chosen later)
+- selective capability extraction only when required by scale/latency/security
 
-Planned topology:
+Planned topology (conceptual):
 
-```txt
-apps/
-  mobile
-  web
-  admin
-  watch
-  backend
-
-packages/
-  contracts
-  api-client
-  ui
-  config
-  utils
-  analytics
-
-services/ (when required)
-  ai-orchestrator
-  nutrition-engine
-  recovery-engine
-  wearable-service
-  realtime-service
-```
+- client applications (mobile, watch companion, web dashboard)
+- administrative console
+- core service layer (identity, data, rules)
+- domain capability modules (nutrition, training, recovery)
+- adaptive intelligence layer (recommendations, coaching)
+- optional integration layer (wearables, providers)
+- optional realtime interaction layer (live sessions)
 
 ## 4) Domain Model (Build in This Order)
 
 1. User and Goal domain
 2. Nutrition logging domain
-3. Workout session domain
+3. Training session domain
 4. Recovery and sleep domain
-5. AI orchestration domain
-6. Wearable ingestion domain
+5. Adaptive intelligence domain
+6. External data synchronization domain (wearables/providers)
 7. Prediction and adaptation domain
 
 ## 5) Milestone Plan
@@ -86,51 +73,51 @@ services/ (when required)
 
 Deliver:
 
-- polished Android-first UI
+- polished mobile-first UI foundations
 - tokenized design system
 - reusable component architecture
-- stable tab and stack navigation
+- stable navigation patterns
 - state-complete mock screens
 
 Exit criteria:
 
-- 25-40 quality screens
-- no backend dependencies
+- 25-40 quality screens (as per screen inventory)
+- no production data dependencies
 - docs-to-UI compliance validated
 
-### Milestone B - Backend Core (v0.2)
+### Milestone B - Core Service Foundation (v0.2)
 
 Deliver:
 
-- backend app bootstrap
-- shared contracts baseline
-- DB schema v1 (core tables only)
-- auth/session contract wiring
-- logging, validation, error envelope standards
+- core service layer bootstrap
+- shared domain contracts baseline
+- data model v1 (core entities only)
+- identity/access contract wiring
+- logging, validation, and error standards
 
 Exit criteria:
 
-- mobile consumes typed mock-compatible contracts
-- no direct privileged client DB access
+- clients consume stable contracts (mock-compatible)
+- no direct privileged data access from clients
 
-### Milestone C - Domain Engines (v0.3)
+### Milestone C - Domain Capability Modules (v0.3)
 
 Deliver:
 
-- nutrition engine v1
-- workout progression engine v1
-- recovery score pipeline v1
+- nutrition capability v1
+- training progression capability v1
+- recovery scoring capability v1
 
 Exit criteria:
 
 - deterministic recommendations available
 - per-domain versioned contracts published
 
-### Milestone D - AI Layer (v0.4)
+### Milestone D - Adaptive Intelligence Layer (v0.4)
 
 Deliver:
 
-- AI orchestrator service
+- adaptive intelligence coordination layer
 - memory policy (short + long context)
 - recommendation explanation format
 - safety and escalation logic
@@ -141,18 +128,18 @@ Exit criteria:
 - confidence-aware responses
 - unsafe recommendation blocking
 
-### Milestone E - Wearables + Realtime (v0.5)
+### Milestone E - Integrations + Realtime (v0.5)
 
 Deliver:
 
-- Health Connect / provider ingestion adapters
-- realtime session channel for workout coaching
+- provider/wearable ingestion adapters (provider choice deferred)
+- realtime session capability for live coaching
 - readiness and adaptation updates
 
 Exit criteria:
 
-- low-latency workout state updates
-- recovery-aware workout recommendations
+- low-latency session state updates
+- recovery-aware training recommendations
 
 ### Milestone F - Adaptive Health OS (v1.0)
 
@@ -170,19 +157,19 @@ Exit criteria:
 
 ## 6) Non-Negotiable Guardrails
 
-- backend-owned critical mutations only
-- additive schema evolution only
+- service-owned critical mutations only
+- additive data model evolution only
 - shared contracts as single source of truth
-- health-safety filter before AI suggestions
+- health-safety filter before adaptive suggestions
 - no medical diagnosis claims
 - strict secret/privacy handling
 
 ## 7) Data and AI Governance
 
 - user-sensitive health data must be encrypted at rest and in transit
-- explicit consent for media and wearable ingestion
+- explicit consent for media and external data ingestion
 - delete/export controls must be designed early
-- AI memory should store structured, auditable facts
+- adaptive memory must store structured, auditable facts (user-visible, user-deletable)
 
 ## 8) Execution Rhythm
 
@@ -196,17 +183,15 @@ For each milestone:
 
 ## 9) Immediate Next Actions (Current Sprint)
 
-1. stabilize remaining top bar and tab bar UI details
+1. stabilize remaining navigation and UI details
 2. close P1/P2 screen placeholders to documented state coverage
 3. finalize docs index and source-of-truth links
-4. prepare backend bootstrap plan without integrating it yet
+4. prepare the core service foundation plan (without integrating it yet)
 
 ## 10) Source-of-Truth Document Order
 
 1. `MASTER_EXECUTION_PLAN.md`
 2. `README.md`
 3. `docs/FEATURE_ROADMAP.md`
-4. `docs/MONOREPO_STRUCTURE.md`
-5. design/navigation/component/token docs under `docs/`
 
 If conflicts appear, this file governs execution sequencing.
