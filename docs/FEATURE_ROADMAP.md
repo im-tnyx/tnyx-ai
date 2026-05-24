@@ -2,67 +2,68 @@
 
 This document defines rollout order and development priorities for TNYX.
 
+> **Policy:** This roadmap is **planning-only** and **technology-agnostic**. It must not commit to any specific language, framework, vendor, provider, database, or infrastructure.
+
 Current focus:
 
-- Android mobile UI only
+- mobile UI prototyping only
 - mock data only
-- no backend logic integration
-- no production API integration
+- no service logic integration
+- no production integrations
 
 ## Execution Alignment
 
 - This roadmap governs phased delivery under root `MASTER_EXECUTION_PLAN.md`.
-- Detailed UI execution standards are enforced by:
-  `SCREEN_INVENTORY.md`, `EXPO_SETUP.md`, `UI_GENERATION_WORKFLOW.md`, and `CODING_STANDARDS.md`.
+- Detailed UI standards live in supporting documents (screen inventory, design system, navigation, motion, and coding standards).
 
 ## 1) Product Vision
 
-TNYX is an AI-first health, fitness, nutrition, recovery, and coaching ecosystem.
+TNYX is an adaptive health, fitness, nutrition, recovery, and coaching ecosystem.
 
 Long-term platform scope:
 
 - mobile apps
 - watch companion apps
 - web dashboard
-- admin panel
-- AI coaching system
+- admin console
+- coaching system
 - recovery intelligence
 - nutrition intelligence
-- health sync integrations
+- external health data synchronization
 
 ## 2) Current Development Phase
 
 ### Phase: UI Foundation (v0.1)
 
 Goal:
-Create a production-grade Android mobile UI prototype with premium UX quality.
+Create a production-grade mobile UI prototype with premium UX quality.
 
 In scope:
 
 - screen architecture
 - design system implementation
 - navigation flows
-- animation baselines
+- motion/interaction baselines
 - reusable component library
 - mock data states
 
 Out of scope:
 
-- backend integration
-- auth APIs implementation
-- realtime sync
-- AI orchestration logic
+- service integration
+- identity/access implementation
+- realtime synchronization
+- adaptive intelligence wiring
 - production persistence
+- watch runtime implementation
 
 ## 3) UI-Only Rules (v0.1)
 
 During v0.1:
 
 - all data remains mock-driven
-- no API calls
-- no Supabase/Firebase wiring
-- no business logic implementation
-- no watch runtime implementation
+- no production network calls
+- no vendor-specific wiring
+- no domain rule implementation
 
 ## 4) MVP Screen Priorities
 
@@ -71,18 +72,18 @@ During v0.1:
 - Splash
 - Welcome
 - Login
-- OTP Verify
+- Verification
 - Onboarding
 - Permissions
 
 ### P2 Main Navigation
 
 - Home Dashboard
-- Bottom Tabs
+- Primary Tabs
 - Navigation Shell
 - Empty and Loading States
 
-### P3 Workout Module
+### P3 Training Module
 
 - Planner
 - Session
@@ -96,17 +97,17 @@ During v0.1:
 - Dashboard
 - Food Logging
 - Barcode Entry
-- Food Camera Entry
-- Voice Food Entry
+- Camera Entry
+- Voice Entry
 - Micronutrient Summary
 
-### P5 AI Surfaces
+### P5 Coaching Surfaces
 
-- AI Coach Entry
-- AI Chat UI
-- AI Workout Suggestions
-- AI Nutrition Suggestions
-- AI Recovery Insights
+- Coach Entry
+- Coach Chat UI
+- Training Suggestions
+- Nutrition Suggestions
+- Recovery Insights
 
 ### P6 Recovery and Analytics
 
@@ -128,32 +129,32 @@ During v0.1:
 
 ## 5) Immediate Deliverable Target (v0.1)
 
-- 25-40 polished Android screens
+- 25-40 polished mobile screens
 - reusable design system
 - stable navigation structure
 - smooth transitions
 - mock-driven interactions
 
-No backend work required before this milestone is complete.
+No service work is required before this milestone is complete.
 
 ## 6) Post UI Foundation Roadmap
 
 ### v0.2
 
-- backend contracts
-- auth integration
+- service contracts baseline
+- identity/access integration
 - persistence baseline
 
 ### v0.3
 
-- AI integration
-- nutrition APIs
-- wearable sync
+- adaptive coaching integration
+- nutrition capability rollout
+- external data synchronization
 
 ### v0.4
 
 - subscriptions
-- realtime sync
+- realtime capability
 - notification intelligence
 
 ### v1.0
@@ -164,9 +165,8 @@ No backend work required before this milestone is complete.
 
 ## 7) Documentation Status
 
-Core v0.1 docs are available:
+Core v0.1 docs include:
 
-- `MONOREPO_STRUCTURE.md`
 - `DESIGN_SYSTEM.md`
 - `DESIGN_TOKENS.md`
 - `NAVIGATION_STRUCTURE.md`
@@ -174,7 +174,6 @@ Core v0.1 docs are available:
 - `COMPONENT_ARCHITECTURE.md`
 - `ANIMATION_GUIDELINES.md`
 - `FIGMA_STRUCTURE.md`
-- `EXPO_SETUP.md`
 - `UI_GENERATION_WORKFLOW.md`
 - `CODING_STANDARDS.md`
 
@@ -187,7 +186,7 @@ Primary execution authority:
 Current path:
 
 Documentation complete  
--> Android mobile UI foundation  
--> no backend coupling in v0.1  
+-> mobile UI foundation  
+-> no service coupling in v0.1  
 -> component-first implementation  
 -> premium mock-driven screens
