@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tnyx_mobile/features/home/presentation/temp_home_screen.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_route.dart';
 
 sealed class AppRoutes {
   static const String welcome = '/welcome';
+  static const String tempHome = '/temp-home';
 }
 
 class AppRouter {
@@ -11,6 +13,11 @@ class AppRouter {
       case AppRoutes.welcome:
         return MaterialPageRoute<void>(
           builder: (_) => const WelcomeRoute(),
+          settings: settings,
+        );
+      case AppRoutes.tempHome:
+        return MaterialPageRoute<void>(
+          builder: (_) => const TempHomeScreen(),
           settings: settings,
         );
       default:

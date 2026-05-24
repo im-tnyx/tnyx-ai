@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tnyx_mobile/core/navigation/app_router.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_contract.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_screen.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_view_model.dart';
@@ -29,7 +30,7 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
     _viewModel.onAction(action);
     switch (action) {
       case WelcomeGetStartedClicked():
-        // Next onboarding route will be wired here.
+        Navigator.of(context).pushReplacementNamed(AppRoutes.tempHome);
         break;
       case WelcomeSignInClicked():
         // Sign-in route will be wired here.
