@@ -57,6 +57,22 @@ Planned topology (conceptual):
 - optional integration layer (wearables, providers)
 - optional realtime interaction layer (live sessions)
 
+### Adaptive Intelligence Architecture (Conceptual)
+
+The "Adaptive Health OS" experience is composed of multiple coordinated, technology-agnostic capabilities:
+
+- **Decision/Recommendation Engine:** deterministic rules first, then adaptive/personalized behavior as maturity increases
+- **Memory System (Auditable):** structured facts and preferences, user-visible and user-deletable
+- **Safety Filter (Hard Guardrails):** blocks unsafe deficits, overtraining, risky suggestions; enforces conservative defaults
+- **Explanation Layer:** consistent "why" format, confidence signals, and what data was used
+- **Realtime Coaching Loop (Optional):** low-latency session state for live workouts and recovery-aware adjustments
+
+### Multi-platform sequencing (Conceptual)
+
+- v0.1 focuses on mobile UI foundations.
+- web/admin and watch companions are staged when contracts and core services exist.
+- realtime sessions and device-aware adaptation unlock the full watch experience.
+
 ## 4) Domain Model (Build in This Order)
 
 1. User and Goal domain
@@ -99,6 +115,7 @@ Exit criteria:
 
 - clients consume stable contracts (mock-compatible)
 - no direct privileged data access from clients
+- consent model baseline documented (what is collected, why, and user controls)
 
 ### Milestone C - Domain Capability Modules (v0.3)
 
@@ -112,6 +129,7 @@ Exit criteria:
 
 - deterministic recommendations available
 - per-domain versioned contracts published
+- export/delete control design complete (user controls designed early)
 
 ### Milestone D - Adaptive Intelligence Layer (v0.4)
 
@@ -163,6 +181,16 @@ Exit criteria:
 - health-safety filter before adaptive suggestions
 - no medical diagnosis claims
 - strict secret/privacy handling
+
+### Safety & Risk Policy (Planning)
+
+TNYX must prioritize safety, especially before introducing autonomous adaptation:
+
+- prevent unhealthy calorie deficits and extreme recommendations
+- block overtraining signals from escalating load or frequency
+- conservative defaults when confidence is low or data is missing
+- clear disclaimers and escalation language (not medical care)
+- age-aware defaults (e.g., stricter constraints for minors)
 
 ## 7) Data and AI Governance
 
