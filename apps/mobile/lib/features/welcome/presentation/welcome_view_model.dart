@@ -11,6 +11,10 @@ class WelcomeViewModel extends ChangeNotifier {
       case WelcomeGetStartedClicked():
         _uiState = const WelcomeUiState();
         notifyListeners();
+      case WelcomeSignInClicked():
+        return;
+      case WelcomeSkipForNowClicked():
+        return;
     }
   }
 }

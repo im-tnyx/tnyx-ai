@@ -6,7 +6,7 @@ void main() {
     await tester.pumpWidget(const TnyxApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('Welcome to TNYX'), findsOneWidget);
+    expect(find.text('Skip for now'), findsOneWidget);
     expect(find.text('Get Started'), findsOneWidget);
   });
 }

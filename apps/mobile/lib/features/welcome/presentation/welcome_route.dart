@@ -31,6 +31,12 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
       case WelcomeGetStartedClicked():
         // Next onboarding route will be wired here.
         break;
+      case WelcomeSignInClicked():
+        // Sign-in route will be wired here.
+        break;
+      case WelcomeSkipForNowClicked():
+        // Skip flow route will be wired here.
+        break;
     }
   }
 
