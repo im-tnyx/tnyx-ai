@@ -11,10 +11,10 @@ TNYX ek Adaptive AI Health Operating System hai jo multiple platforms pe kaam ka
 ```bash
 tnyx-ai/                          # Monorepo Root
 ├── apps/                         # All Applications
-│   ├── tnyx_mobile/              # Main Flutter App (Android + iOS)
-│   ├── tnyx_web/                 # User Website (Flutter Web)
-│   ├── tnyx_admin/               # Admin Dashboard
-│   └── tnyx_watch/               # Wear OS Watch App
+│   ├── mobile/              # Main Flutter App (Android + iOS)
+│   ├── web/                 # User Website (Flutter Web)
+│   ├── admin/               # Admin Dashboard
+│   └── watch/               # Wear OS Watch App
 │
 ├── backend/                      # Python FastAPI Backend
 │
@@ -37,7 +37,7 @@ tnyx-ai/                          # Monorepo Root
 ### `apps/tnyx_mobile/` (Primary App)
 
 ```bash
-tnyx_mobile/
+mobile/
 ├── lib/
 │   ├── core/                 # Theme, DI, Routes, Config, Utils
 │   ├── features/             # Feature-wise modules
@@ -60,15 +60,15 @@ tnyx_mobile/
 └── pubspec.yaml
 ```
 
-### `apps/tnyx_web/`
+### `apps/web/`
 
 Flutter Web (User Facing Website)
 
-### `apps/tnyx_admin/`
+### `apps/admin/`
 
 Admin Panel (Next.js ya Flutter Web)
 
-### `apps/tnyx_watch/`
+### `apps/watch/`
 
 Wear OS Companion App
 
@@ -127,5 +127,5 @@ docs/
 ## Notes
 
 - Maximum code sharing `packages/` ke through.
-- `apps/tnyx_mobile/` ko sabse zyada priority dena hai.
+- `apps/mobile/` ko sabse zyada priority dena hai.
 - Global support (i18n, multi-region food DB, Metric/Imperial) abhi se consider karna hai.

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tnyx_mobile/core/theme/app_colors.dart';
 import 'package:tnyx_mobile/core/theme/app_dimens.dart';
+import 'package:tnyx_mobile/core/theme/app_fonts.dart';
 import 'package:tnyx_mobile/core/theme/app_status_colors.dart';
 import 'package:tnyx_mobile/core/theme/app_typography.dart';
 
@@ -11,15 +12,20 @@ sealed class TnyxTheme {
         colorScheme: const ColorScheme.light(
           primary: TnyxColors.brandPrimary,
           onPrimary: TnyxColors.brandOnPrimary,
-          primaryContainer: TnyxColors.brandPrimaryContainer,
-          onPrimaryContainer: TnyxColors.brandOnPrimaryContainer,
+          primaryContainer: TnyxColors.lightPrimaryContainer,
+          onPrimaryContainer: TnyxColors.lightOnPrimaryContainer,
+          secondary: TnyxColors.brandSecondary,
+          onSecondary: TnyxColors.brandOnSecondary,
+          tertiary: TnyxColors.brandAccent,
+          onTertiary: TnyxColors.brandOnAccent,
           surface: TnyxColors.lightSurface,
           onSurface: TnyxColors.lightOnSurface,
-          surfaceContainerHighest: TnyxColors.lightSurfaceVariant,
+          surfaceVariant: TnyxColors.lightSurfaceVariant,
+          outline: TnyxColors.lightOutline,
           error: TnyxColors.error,
           onError: Colors.white,
         ),
-        textTheme: TnyxTypography.textTheme,
+        textTheme: getAppTypography(TnyxFonts.defaultFontType),
         useMaterial3: true,
         extensions: const <ThemeExtension<dynamic>>[
           TnyxDimens.defaults,
@@ -33,15 +39,20 @@ sealed class TnyxTheme {
         colorScheme: const ColorScheme.dark(
           primary: TnyxColors.brandPrimary,
           onPrimary: TnyxColors.brandOnPrimary,
-          primaryContainer: TnyxColors.brandOnPrimaryContainer,
-          onPrimaryContainer: TnyxColors.brandPrimaryContainer,
+          primaryContainer: TnyxColors.darkPrimaryContainer,
+          onPrimaryContainer: TnyxColors.darkOnPrimaryContainer,
+          secondary: TnyxColors.brandSecondary,
+          onSecondary: TnyxColors.brandOnSecondary,
+          tertiary: TnyxColors.brandAccent,
+          onTertiary: TnyxColors.brandOnAccent,
           surface: TnyxColors.darkSurface,
           onSurface: TnyxColors.darkOnSurface,
-          surfaceContainerHighest: TnyxColors.darkSurfaceVariant,
+          surfaceVariant: TnyxColors.darkSurfaceVariant,
+          outline: TnyxColors.darkOutline,
           error: TnyxColors.error,
           onError: Colors.white,
         ),
-        textTheme: TnyxTypography.textTheme,
+        textTheme: getAppTypography(TnyxFonts.defaultFontType),
         useMaterial3: true,
         extensions: const <ThemeExtension<dynamic>>[
           TnyxDimens.defaults,
