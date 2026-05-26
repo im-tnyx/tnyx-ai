@@ -64,6 +64,11 @@ During v0.1:
 - no production network calls
 - no vendor-specific wiring
 - no domain rule implementation
+- no business logic inside any screen/composable
+- no navigation logic inside screens
+- mandatory screen architecture: `Route -> Screen -> ViewModel -> UiState + Action`
+- all user interactions must be emitted as typed `Action`
+- `UiState` must be immutable and fully drive screen rendering
 
 ## 4) MVP Screen Priorities
 
@@ -176,6 +181,8 @@ Core v0.1 docs include:
 - `FIGMA_STRUCTURE.md`
 - `UI_GENERATION_WORKFLOW.md`
 - `CODING_STANDARDS.md`
+- `MOBILE_UI_ARCHITECTURE_STANDARD.md`
+- `../apps/mobile/docs/mobile-ui.prompt.md`
 
 Primary execution authority:
 

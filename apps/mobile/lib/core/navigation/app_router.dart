@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tnyx_mobile/features/home/presentation/home_screen.dart';
+import 'package:tnyx_mobile/features/home/presentation/home_route.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_route.dart';
 
 sealed class AppRoutes {
@@ -18,7 +18,7 @@ class AppRouter {
         );
       case AppRoutes.home:
         return MaterialPageRoute<void>(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const HomeRoute(),
           settings: settings,
         );
       default:

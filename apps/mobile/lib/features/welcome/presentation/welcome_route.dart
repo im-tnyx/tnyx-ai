@@ -45,6 +45,24 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
       case WelcomeLanguageClicked():
         _openLanguageSheet();
         break;
+      case WelcomeTermsClicked():
+        final strings = _viewModel.uiState.strings;
+        showLegalDocumentSheet(
+          context: context,
+          type: LegalDocumentType.terms,
+          termsUrl: strings.termsUrl,
+          privacyUrl: strings.privacyUrl,
+        );
+        break;
+      case WelcomePrivacyClicked():
+        final strings = _viewModel.uiState.strings;
+        showLegalDocumentSheet(
+          context: context,
+          type: LegalDocumentType.privacy,
+          termsUrl: strings.termsUrl,
+          privacyUrl: strings.privacyUrl,
+        );
+        break;
     }
   }
 
@@ -67,25 +85,14 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
   Widget build(BuildContext context) {
     final languageManager = LanguageScope.watch(context);
     final strings = AppLocalizedStrings.from(languageManager.currentLanguage);
+    _viewModel.syncLocalizedStrings(strings);
 
     return AnimatedBuilder(
       animation: _viewModel,
       builder: (context, _) {
         return WelcomeScreen(
-          strings: strings,
+          uiState: _viewModel.uiState,
           onAction: _onAction,
-          onTermsTap: () => showLegalDocumentSheet(
-            context: context,
-            type: LegalDocumentType.terms,
-            termsUrl: strings.termsUrl,
-            privacyUrl: strings.privacyUrl,
-          ),
-          onPrivacyTap: () => showLegalDocumentSheet(
-            context: context,
-            type: LegalDocumentType.privacy,
-            termsUrl: strings.termsUrl,
-            privacyUrl: strings.privacyUrl,
-          ),
         );
       },
     );

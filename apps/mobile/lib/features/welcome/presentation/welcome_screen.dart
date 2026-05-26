@@ -6,20 +6,17 @@ import 'package:flutter/gestures.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({
-    required this.strings,
+    required this.uiState,
     required this.onAction,
-    required this.onTermsTap,
-    required this.onPrivacyTap,
     super.key,
   });
 
-  final AppLocalizedStrings strings;
+  final WelcomeUiState uiState;
   final ValueChanged<WelcomeAction> onAction;
-  final VoidCallback onTermsTap;
-  final VoidCallback onPrivacyTap;
 
   @override
   Widget build(BuildContext context) {
+    final strings = uiState.strings;
     final dims = context.dimens;
     final textTheme = Theme.of(context).textTheme;
 
@@ -35,7 +32,6 @@ class WelcomeScreen extends StatelessWidget {
                 final height = constraints.maxHeight;
                 final isCompact = height < 760;
                 final isTiny = height < 680;
-                final subtitle = _subtitleByLocale(strings.localeCode);
                 final titleSize = isTiny
                     ? 44.0
                     : isCompact
@@ -58,9 +54,6 @@ class WelcomeScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: const Color(0x99111418),
                               borderRadius: BorderRadius.circular(999),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.2),
-                              ),
                             ),
                             child: TextButton(
                               onPressed: () =>
@@ -106,7 +99,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       SizedBox(height: isTiny ? 6 : dims.spacing8),
                       Text(
-                        subtitle,
+                        uiState.subtitle,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: textTheme.bodyLarge?.copyWith(
@@ -198,8 +191,10 @@ class WelcomeScreen extends StatelessWidget {
                       SizedBox(height: isTiny ? 10 : dims.spacing12),
                       _DisclaimerText(
                         strings: strings,
-                        onTermsTap: onTermsTap,
-                        onPrivacyTap: onPrivacyTap,
+                        onTermsTap: () =>
+                            onAction(const WelcomeTermsClicked()),
+                        onPrivacyTap: () =>
+                            onAction(const WelcomePrivacyClicked()),
                       ),
                     ],
                   ),
@@ -211,13 +206,6 @@ class WelcomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-String _subtitleByLocale(String localeCode) {
-  if (localeCode == 'HI') {
-    return 'Nutrition, workouts aur recovery ko ek smart flow me manage karein.';
-  }
-  return 'Track nutrition, workouts, and recovery in one smart flow.';
 }
 
 IconData _featureIconByIndex(int index) {

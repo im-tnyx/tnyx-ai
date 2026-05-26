@@ -164,6 +164,19 @@ Exit criteria:
 - no medical diagnosis claims
 - strict secret/privacy handling
 
+### UI Architecture Guardrail (Mandatory)
+
+For all client UI modules in current and future milestones:
+
+- Use `Route -> Screen -> ViewModel -> UiState + Action` flow.
+- `Screen` must remain dumb/presentational only.
+- No business logic inside any screen/composable/widget.
+- No navigation decision logic inside screens.
+- `Route` owns navigation callbacks and wires state/actions.
+- `ViewModel` owns UI state transitions and non-navigation behavior.
+- `UiState` must be immutable and render-complete.
+- All user events must flow through typed `Action` models.
+
 ## 7) Data and AI Governance
 
 - user-sensitive health data must be encrypted at rest and in transit

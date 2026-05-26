@@ -58,6 +58,8 @@ Primary docs for the current phase:
 
 - [`MASTER_EXECUTION_PLAN.md`](./MASTER_EXECUTION_PLAN.md)
 - [`docs/FEATURE_ROADMAP.md`](./docs/FEATURE_ROADMAP.md)
+- [`docs/MOBILE_UI_ARCHITECTURE_STANDARD.md`](./docs/MOBILE_UI_ARCHITECTURE_STANDARD.md)
+- [`apps/mobile/docs/mobile-ui.prompt.md`](./apps/mobile/docs/mobile-ui.prompt.md)
 
 Execution priority on conflict:
 
