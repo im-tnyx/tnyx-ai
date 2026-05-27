@@ -57,6 +57,21 @@ Planned topology (conceptual):
 - optional integration layer (wearables, providers)
 - optional realtime interaction layer (live sessions)
 
+### AI Modules (Conceptual Capability Map)
+
+The Adaptive Health OS experience is composed of coordinated capability modules:
+
+- recommendation engine (deterministic first, adaptive later)
+- nutrition intelligence module
+- workout intelligence module
+- recovery and sleep intelligence module
+- multimodal logging module (text, voice, barcode, image, OCR)
+- safety filter module (hard guardrails)
+- explanation module (why + confidence)
+- memory module (auditable, user-controlled)
+- realtime coaching loop (low-latency session behavior)
+- external signal module (wearables/device data)
+
 ## 4) Domain Model (Build in This Order)
 
 1. User and Goal domain
@@ -121,6 +136,7 @@ Deliver:
 - memory policy (short + long context)
 - recommendation explanation format
 - safety and escalation logic
+- multimodal logging orchestration policy
 
 Exit criteria:
 
@@ -135,6 +151,7 @@ Deliver:
 - provider/wearable ingestion adapters (provider choice deferred)
 - realtime session capability for live coaching
 - readiness and adaptation updates
+- environment-aware context hooks (weather/AQI as optional signals)
 
 Exit criteria:
 

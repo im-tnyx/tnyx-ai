@@ -142,31 +142,41 @@ During v0.1:
 
 No service work is required before this milestone is complete.
 
-## 6) Post UI Foundation Roadmap
+## 6) Post UI Foundation Roadmap (Staged Intelligence)
 
-### v0.2
+### v0.2 - Core Service Foundation
 
 - service contracts baseline
 - identity/access integration
 - persistence baseline
+- consent and data-control baseline
 
-### v0.3
+### v0.3 - Deterministic Intelligence Modules
 
-- adaptive coaching integration
-- nutrition capability rollout
-- external data synchronization
+- nutrition intelligence v1 (rules-first)
+- workout intelligence v1 (progression + planning baseline)
+- recovery intelligence v1 (readiness and fatigue signals)
+- safety filter baseline for recommendations
 
-### v0.4
+### v0.4 - Adaptive Intelligence Core
 
-- subscriptions
-- realtime capability
-- notification intelligence
+- memory policy and memory module baseline (auditable, user-controlled)
+- explanation layer baseline (why + confidence)
+- adaptive recommendation coordination
+- multimodal logging policy and module wiring baseline
 
-### v1.0
+### v0.5 - Integrations + Realtime Coaching
 
-- production release hardening
-- analytics maturity
-- scale and optimization
+- wearable and external-device integration baseline
+- realtime workout coaching loop
+- low-latency session-state updates
+- notification intelligence where required
+
+### v1.0 - Adaptive Health OS Hardening
+
+- autonomous adaptation with safety gating
+- analytics maturity and longitudinal insights
+- reliability, scale, and production hardening
 
 ## 7) Documentation Status
 
