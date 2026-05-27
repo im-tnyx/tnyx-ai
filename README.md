@@ -1,22 +1,20 @@
 # TNYX
 
-AI-powered health, fitness, nutrition, recovery, and coaching ecosystem.
+Adaptive AI-powered Health Operating System (nutrition, training, recovery, sleep, stress, and coaching).
 
-> **Status:** Planning + foundation only (no implementation commitments).
+> **Status:** Planning + UI foundation only (v0.1). No production integration commitments yet.
 
-## Overview
+## Vision
 
-TNYX is an adaptive health platform focused on:
+TNYX is not a basic tracker. It is designed as an adaptive system that can:
 
-- Workout tracking and progression
-- Training programming (adaptive over time)
-- Nutrition and micronutrient logging
-- Recovery intelligence and readiness signals
-- Water and sleep tracking
-- Wearable and health data synchronization
-- Coaching workflows and recommendations
+- understand user context and goals
+- learn long-term behavior patterns
+- adapt recommendations over time
+- provide explainable suggestions with confidence
+- enforce safety-first coaching behavior
 
-This repository is intentionally **planning-first**: product definition, milestones, scope, and operating rules.
+This repository is intentionally **planning-first**: product definition, milestone sequencing, scope boundaries, and operating rules.
 
 ## Platforms (Target)
 
@@ -45,6 +43,12 @@ Scope for the initial milestone:
 - Dark theme-first UX
 
 **Note:** Delivery sequencing remains UI/UX and domain planning first. Integration and implementation choices are deferred until the foundation stabilizes.
+
+## Architecture Direction (Planning)
+
+- Core backend orchestration: `Node.js + Express + TypeScript`
+- Optional AI/ML compute services (when needed): `Python` as capability modules
+- Shared contracts remain the source of truth across all clients and services
 
 ## Execution Plan
 
