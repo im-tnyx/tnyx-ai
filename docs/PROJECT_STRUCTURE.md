@@ -2,110 +2,135 @@
 
 **Version:** 1.1  
 **Date:** May 2026  
-**Architecture:** Monorepo (Flutter + TypeScript/Node.js + Optional Python AI Services)
+**Architecture:** Monorepo (Flutter + Python)
 
-TNYX is an Adaptive AI Health Operating System across mobile, watch, web, admin, and backend layers.
+TNYX ek Adaptive AI Health Operating System hai jo multiple platforms pe kaam karega.
+
+> Note: GitHub repo name `tnyx-ai` ho sakta hai, lekin local monorepo root folder ko aap `tnyx/` rakh sakte ho. Docs mein hum logical structure ko refer kar rahe hain.
 
 ## Root Folder Structure
 
-```txt
-tnyx-ai/                          # Monorepo Root
-|-- apps/                         # Application surfaces
-|   |-- mobile/                   # Main Flutter app (Android + iOS)
-|   |-- web/                      # Web dashboard (Next.js App Router)
-|   |-- admin/                    # Admin console (Next.js)
-|   `-- watch/                    # Wear OS companion app
-|
-|-- backend/                      # Core API/backend orchestration (Node.js + Express + TypeScript)
-|-- packages/                     # Shared packages and contracts
-|-- docs/                         # Architecture, roadmap, standards
-|-- infra/                        # Infrastructure and deployment configs
-|-- scripts/                      # Utility scripts
-|-- .github/                      # CI/CD workflows
-|-- melos.yaml                    # Flutter workspace orchestration (Dart packages)
-|-- README.md
-|-- MASTER_EXECUTION_PLAN.md
-`-- .gitignore
+```bash
+tnyx/                             # Monorepo Root (repo: tnyx-ai)
+├── apps/                         # All Applications
+│   ├── mobile/                   # Main Flutter App (Android + iOS)
+│   ├── web/                      # User Website (Flutter Web)
+│   ├── admin/                    # Admin Dashboard
+│   └── watch/                    # Wear OS Watch App
+│
+├── backend/                      # Python FastAPI Backend
+├── packages/                     # Shared Packages (Code Reuse)
+├── docs/                         # All Documentation
+├── infra/                        # Infrastructure & Deployment
+├── scripts/                      # Utility Scripts
+├── .github/                      # CI/CD Workflows
+├── melos.yaml                    # Monorepo Management (Flutter)
+├── README.md
+├── MASTER_EXECUTION_PLAN.md
+└── .gitignore
 ```
 
-## Apps Folder (Detailed)
+## Naming Clarification (Important)
+
+- **Folder names** (`apps/mobile`) ko simple rakho, kyunki ye monorepo navigation aur tooling (melos) ke liye readable hota hai.
+- **Flutter pubspec name** (e.g., `name: tnyx_mobile`) Dart package identifier hota hai, folder name nahi. Monorepo mein multiple apps/pkgs honge, isliye `tnyx_mobile` jaisa unique name practical hota hai.
+- **App identity** (Android `applicationId`, iOS bundle id) alag cheez hai, jo later production ke time set hogi.
+
+## 1) Apps Folder (Detailed)
 
 ### `apps/mobile/` (Primary App)
 
-```txt
+```bash
 mobile/
-|-- lib/
-|   |-- app/                      # App wiring (MaterialApp, routes, shell)
-|   |-- core/                     # Theme, config, shared runtime primitives
-|   |-- features/                 # Feature modules
-|   |-- shared/                   # Shared widgets/models/extensions
-|   |-- wear/                     # Optional watch-specific shared flows
-|   `-- main.dart
-|-- assets/
-|-- test/
-`-- pubspec.yaml
+├── lib/
+│   ├── app/                  # App entry wiring (MaterialApp, etc.)
+│   ├── core/                 # Theme, DI, Routes, Config, Utils
+│   ├── features/             # Feature-wise modules
+│   │   ├── nutrition/
+│   │   ├── workout/
+│   │   ├── live_coach/
+│   │   ├── camera_vision/
+│   │   ├── ai_chat/
+│   │   ├── recovery/
+│   │   ├── profile/
+│   │   └── ...
+│   ├── shared/               # Shared widgets, models, extensions
+│   ├── wear/                 # Wear OS specific logic (if needed)
+│   └── main.dart
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── animations/
+├── test/
+└── pubspec.yaml
 ```
 
 ### `apps/web/`
 
-Next.js App Router user dashboard.
+Flutter Web (User Facing Website)
 
 ### `apps/admin/`
 
-Next.js admin console for operations and governance workflows.
+Admin Panel (Next.js ya Flutter Web)
 
 ### `apps/watch/`
 
-Wear OS companion runtime (fast interactions, low-latency controls).
+Wear OS Companion App
 
-## Packages Folder (Shared Code)
+## 2) Packages Folder (Shared Code)
 
-```txt
+```bash
 packages/
-|-- contracts/                    # Shared DTOs, route/event contracts (source of truth)
-|-- design_system/                # Shared UI tokens/components where applicable
-|-- shared_models/                # Shared domain models
-`-- utilities/                    # Common helpers
+├── design_system/            # UI Components, Theme, Typography
+├── shared_models/            # Common Entities & DTOs
+├── tnyx_core/                # Business Logic, API Client, Utils
+├── contracts/                # OpenAPI Specs
+└── utilities/                # Common Helpers
 ```
 
-## Backend Structure (Core Service Layer)
+## 3) Backend Structure
 
-```txt
+```bash
 backend/
-|-- src/
-|   |-- controllers/              # Thin request handlers
-|   |-- services/                 # Use-case orchestration/business logic
-|   |-- repositories/             # Data access boundaries
-|   |-- modules/                  # Domain modules (nutrition, workout, recovery, coach)
-|   |-- middleware/               # Auth, validation, observability
-|   `-- app.ts
-|-- tests/
-|-- package.json
-`-- tsconfig.json
+├── app/
+│   ├── api/                  # Endpoints (v1/)
+│   ├── core/                 # Config, Security, Database
+│   ├── domain/               # Entities, Use Cases
+│   ├── features/             # nutrition_engine, ai_coach etc.
+│   ├── infrastructure/       # DB, External Services
+│   ├── ml/                   # AI, LangChain, Vision Models
+│   └── services/
+├── alembic/                  # Database Migrations
+├── tests/
+├── pyproject.toml
+└── requirements.txt
 ```
 
-## Optional AI Compute Services (When Needed)
+## 4) Docs Folder
 
-Heavy ML/CV workloads can be isolated as optional Python services behind stable contracts:
-
-- image analysis
-- OCR nutrition label parsing
-- posture/form analysis
-- prediction model execution
-
-These services are optional capability modules and must not bypass backend governance, safety, or shared contracts.
+```bash
+docs/
+├── architecture/
+├── ai/
+├── api/
+├── roadmap/
+├── decision-records/
+├── globalization.md
+├── tech-stack-decision.md
+└── safety-guidelines.md
+```
 
 ## Technology Stack Summary
 
-- **Mobile:** Flutter (Dart)
-- **Watch:** Wear OS companion (Flutter/Wear-compatible approach)
-- **Web/Admin:** Next.js + TypeScript
-- **Core Backend:** Node.js + Express + TypeScript
-- **AI/ML Compute:** Optional Python services (module-level, contract-driven)
-- **Data:** PostgreSQL (+ supporting infra as needed)
+- **Mobile & Web:** Flutter (Dart)
+- **Watch:** Flutter for Wear OS
+- **Admin:** Next.js (recommended) ya Flutter Web
+- **Backend:** Python + FastAPI
+- **AI/ML:** Gemini/Claude + LangChain + MediaPipe + TFLite
+- **Database:** PostgreSQL + Vector DB
 
 ## Notes
 
-- Keep cross-platform contracts in `packages/contracts`.
-- Prioritize `apps/mobile/` during UI foundation milestone.
-- Apply safety-first and explainability-first rules before adaptive autonomy.
+- Maximum code sharing `packages/` ke through.
+- `apps/mobile/` ko sabse zyada priority dena hai.
+- Global support (i18n, multi-region food DB, Metric/Imperial) abhi se consider karna hai.

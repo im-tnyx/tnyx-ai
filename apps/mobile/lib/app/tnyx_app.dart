@@ -1,57 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:tnyx_mobile/core/language/language_manager.dart';
-import 'package:tnyx_mobile/core/language/language_scope.dart';
+import 'package:flutter/services.dart';
 import 'package:tnyx_mobile/core/navigation/app_router.dart';
 import 'package:tnyx_mobile/core/theme/app_theme.dart';
-import 'package:tnyx_mobile/core/theme/theme_mode_manager.dart';
-import 'package:tnyx_mobile/core/theme/theme_mode_scope.dart';
 
-class TnyxApp extends StatefulWidget {
+class TnyxApp extends StatelessWidget {
   const TnyxApp({super.key});
 
   @override
-  State<TnyxApp> createState() => _TnyxAppState();
-}
-
-class _TnyxAppState extends State<TnyxApp> {
-  late final LanguageManager _languageManager;
-  late final ThemeModeManager _themeModeManager;
-
-  @override
-  void initState() {
-    super.initState();
-    _languageManager = LanguageManager();
-    _languageManager.load();
-    _themeModeManager = ThemeModeManager();
-    _themeModeManager.load();
-  }
-
-  @override
-  void dispose() {
-    _languageManager.dispose();
-    _themeModeManager.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ThemeModeScope(
-      notifier: _themeModeManager,
-      child: LanguageScope(
-        notifier: _languageManager,
-        child: AnimatedBuilder(
-          animation: _themeModeManager,
-          builder: (_, __) => MaterialApp(
-            title: 'TNYX',
-            debugShowCheckedModeBanner: false,
-            theme: TnyxTheme.lightTheme,
-            darkTheme: TnyxTheme.darkTheme,
-            themeMode: _themeModeManager.themeMode,
-            onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: AppRoutes.welcome,
+    return MaterialApp(
+      title: 'Tnyx',
+      debugShowCheckedModeBanner: false,
+      theme: TnyxTheme.lightTheme,
+      darkTheme: TnyxTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      onGenerateRoute: AppRouter.onGenerateRoute,
+      initialRoute: AppRoutes.welcome,
+      builder: (context, child) {
+        final theme = Theme.of(context);
+
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle(
+            systemNavigationBarColor: Colors.transparent,
+            systemNavigationBarDividerColor: Colors.transparent,
+            systemNavigationBarIconBrightness: theme.brightness == Brightness.light
+                ? Brightness.dark
+                : Brightness.light,
+            systemNavigationBarContrastEnforced: false,
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: theme.brightness == Brightness.light
+                ? Brightness.dark
+                : Brightness.light,
+            statusBarBrightness: theme.brightness,
           ),
-        ),
-      ),
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
     );
   }
 }

@@ -55,7 +55,7 @@ class LegalDocumentScreen extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Transform.translate(
-                offset: Offset(0, cardBottomOverlap),
+                offset: const Offset(0, cardBottomOverlap),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     maxWidth: 620,

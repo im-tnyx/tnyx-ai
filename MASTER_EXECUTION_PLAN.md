@@ -57,20 +57,21 @@ Planned topology (conceptual):
 - optional integration layer (wearables, providers)
 - optional realtime interaction layer (live sessions)
 
-### AI Modules (Conceptual Capability Map)
+### Adaptive Intelligence Architecture (Conceptual)
 
-The Adaptive Health OS experience is composed of coordinated capability modules:
+The "Adaptive Health OS" experience is composed of multiple coordinated, technology-agnostic capabilities:
 
-- recommendation engine (deterministic first, adaptive later)
-- nutrition intelligence module
-- workout intelligence module
-- recovery and sleep intelligence module
-- multimodal logging module (text, voice, barcode, image, OCR)
-- safety filter module (hard guardrails)
-- explanation module (why + confidence)
-- memory module (auditable, user-controlled)
-- realtime coaching loop (low-latency session behavior)
-- external signal module (wearables/device data)
+- **Decision/Recommendation Engine:** deterministic rules first, then adaptive/personalized behavior as maturity increases
+- **Memory System (Auditable):** structured facts and preferences, user-visible and user-deletable
+- **Safety Filter (Hard Guardrails):** blocks unsafe deficits, overtraining, risky suggestions; enforces conservative defaults
+- **Explanation Layer:** consistent "why" format, confidence signals, and what data was used
+- **Realtime Coaching Loop (Optional):** low-latency session state for live workouts and recovery-aware adjustments
+
+### Multi-platform sequencing (Conceptual)
+
+- v0.1 focuses on mobile UI foundations.
+- web/admin and watch companions are staged when contracts and core services exist.
+- realtime sessions and device-aware adaptation unlock the full watch experience.
 
 ## 4) Domain Model (Build in This Order)
 
@@ -114,6 +115,7 @@ Exit criteria:
 
 - clients consume stable contracts (mock-compatible)
 - no direct privileged data access from clients
+- consent model baseline documented (what is collected, why, and user controls)
 
 ### Milestone C - Domain Capability Modules (v0.3)
 
@@ -127,6 +129,7 @@ Exit criteria:
 
 - deterministic recommendations available
 - per-domain versioned contracts published
+- export/delete control design complete (user controls designed early)
 
 ### Milestone D - Adaptive Intelligence Layer (v0.4)
 
@@ -136,7 +139,6 @@ Deliver:
 - memory policy (short + long context)
 - recommendation explanation format
 - safety and escalation logic
-- multimodal logging orchestration policy
 
 Exit criteria:
 
@@ -151,7 +153,6 @@ Deliver:
 - provider/wearable ingestion adapters (provider choice deferred)
 - realtime session capability for live coaching
 - readiness and adaptation updates
-- environment-aware context hooks (weather/AQI as optional signals)
 
 Exit criteria:
 
@@ -181,18 +182,15 @@ Exit criteria:
 - no medical diagnosis claims
 - strict secret/privacy handling
 
-### UI Architecture Guardrail (Mandatory)
+### Safety & Risk Policy (Planning)
 
-For all client UI modules in current and future milestones:
+TNYX must prioritize safety, especially before introducing autonomous adaptation:
 
-- Use `Route -> Screen -> ViewModel -> UiState + Action` flow.
-- `Screen` must remain dumb/presentational only.
-- No business logic inside any screen/composable/widget.
-- No navigation decision logic inside screens.
-- `Route` owns navigation callbacks and wires state/actions.
-- `ViewModel` owns UI state transitions and non-navigation behavior.
-- `UiState` must be immutable and render-complete.
-- All user events must flow through typed `Action` models.
+- prevent unhealthy calorie deficits and extreme recommendations
+- block overtraining signals from escalating load or frequency
+- conservative defaults when confidence is low or data is missing
+- clear disclaimers and escalation language (not medical care)
+- age-aware defaults (e.g., stricter constraints for minors)
 
 ## 7) Data and AI Governance
 

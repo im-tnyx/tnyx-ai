@@ -20,6 +20,8 @@ Current focus:
 
 TNYX is an adaptive health, fitness, nutrition, recovery, and coaching ecosystem.
 
+It is intended to evolve into an **Adaptive AI Health OS** where coaching is personalized, explainable, and safety-guarded.
+
 Long-term platform scope:
 
 - mobile apps
@@ -64,11 +66,6 @@ During v0.1:
 - no production network calls
 - no vendor-specific wiring
 - no domain rule implementation
-- no business logic inside any screen/composable
-- no navigation logic inside screens
-- mandatory screen architecture: `Route -> Screen -> ViewModel -> UiState + Action`
-- all user interactions must be emitted as typed `Action`
-- `UiState` must be immutable and fully drive screen rendering
 
 ## 4) MVP Screen Priorities
 
@@ -144,41 +141,59 @@ No service work is required before this milestone is complete.
 
 ## 6) Post UI Foundation Roadmap (Staged Intelligence)
 
-### v0.2 - Core Service Foundation
+### v0.2 - Core Data + Identity + Consent (Foundation)
 
 - service contracts baseline
-- identity/access integration
+- identity/access integration (contract-first)
 - persistence baseline
-- consent and data-control baseline
+- consent model baseline (what data is collected, why, user controls)
 
-### v0.3 - Deterministic Intelligence Modules
+### v0.3 - Deterministic Coach + Safety (Rules First)
 
-- nutrition intelligence v1 (rules-first)
-- workout intelligence v1 (progression + planning baseline)
-- recovery intelligence v1 (readiness and fatigue signals)
-- safety filter baseline for recommendations
+- deterministic coaching outputs (rules-based)
+- nutrition capability v1
+- training capability v1
+- recovery scoring v1
+- safety filter baseline and escalation language
 
-### v0.4 - Adaptive Intelligence Core
+### v0.4 - Memory + Explainability + Wearables Baseline
 
-- memory policy and memory module baseline (auditable, user-controlled)
-- explanation layer baseline (why + confidence)
-- adaptive recommendation coordination
-- multimodal logging policy and module wiring baseline
+- memory policy (auditable facts, user-visible/deletable)
+- explanation format maturity (why + confidence)
+- external data synchronization baseline (provider choice deferred)
+- admin console foundation (optional, if required for ops)
 
-### v0.5 - Integrations + Realtime Coaching
+### v0.5 - Multimodal Logging + Realtime Coaching Loop
 
-- wearable and external-device integration baseline
-- realtime workout coaching loop
-- low-latency session-state updates
-- notification intelligence where required
+- barcode logging
+- voice logging
+- camera logging (staged; privacy and accuracy-first)
+- realtime session capability (live coaching surfaces)
+- notification intelligence (as needed)
 
-### v1.0 - Adaptive Health OS Hardening
+### v1.0 - Adaptive Health OS Release Hardening
 
-- autonomous adaptation with safety gating
-- analytics maturity and longitudinal insights
-- reliability, scale, and production hardening
+- autonomous adaptation (calories, deload/refeed) with safety gating
+- analytics maturity
+- scale, performance, and reliability
 
-## 7) Documentation Status
+## 7) Multimodal Food Logging Rollout (Policy)
+
+Multimodal input is staged to protect reliability and user trust:
+
+1. text-first logging
+2. barcode scanning
+3. voice + text hybrid
+4. image logging
+5. OCR nutrition label reading (last; accuracy validation required)
+
+## 8) Wearables & External Data Integration (Policy)
+
+- ingestion must be provider-agnostic via normalized contracts
+- define conflict resolution rules (multiple sources, missing data)
+- explicit user consent for each external source and data category
+
+## 9) Documentation Status
 
 Core v0.1 docs include:
 
@@ -191,14 +206,12 @@ Core v0.1 docs include:
 - `FIGMA_STRUCTURE.md`
 - `UI_GENERATION_WORKFLOW.md`
 - `CODING_STANDARDS.md`
-- `MOBILE_UI_ARCHITECTURE_STANDARD.md`
-- `../apps/mobile/docs/mobile-ui.prompt.md`
 
 Primary execution authority:
 
 - root `MASTER_EXECUTION_PLAN.md`
 
-## 8) Execution Rule
+## 10) Execution Rule
 
 Current path:
 

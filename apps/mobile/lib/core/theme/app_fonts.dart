@@ -8,6 +8,8 @@ sealed class TnyxFonts {
   static const String plusJakartaSans = 'PlusJakartaSans';
   static const String notoSansDevanagari = 'NotoSansDevanagari';
 
+  static const String primary = plusJakartaSans;
+
   static const AppFontType defaultFontType = AppFontType.plusJakartaSans;
 
   static String? getFamily(AppFontType fontType) {

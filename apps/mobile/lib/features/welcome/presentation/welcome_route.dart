@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tnyx_mobile/core/config/app_config.dart';
 import 'package:tnyx_mobile/core/legal/legal_document_sheet.dart';
-import 'package:tnyx_mobile/core/language/app_localized_strings.dart';
-import 'package:tnyx_mobile/core/language/language_scope.dart';
-import 'package:tnyx_mobile/core/language/widgets/language_bottom_sheet.dart';
-import 'package:tnyx_mobile/core/navigation/app_router.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_contract.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_screen.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_view_model.dart';
@@ -34,7 +31,7 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
     _viewModel.onAction(action);
     switch (action) {
       case WelcomeGetStartedClicked():
-        Navigator.of(context).pushReplacementNamed(AppRoutes.home);
+        // Next onboarding route will be wired here.
         break;
       case WelcomeSignInClicked():
         // Sign-in route will be wired here.
@@ -42,56 +39,35 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
       case WelcomeSkipForNowClicked():
         // Skip flow route will be wired here.
         break;
-      case WelcomeLanguageClicked():
-        _openLanguageSheet();
+      case WelcomeLanguageChanged():
+        // Language change is handled inside ViewModel
         break;
-      case WelcomeTermsClicked():
-        final strings = _viewModel.uiState.strings;
-        showLegalDocumentSheet(
+      case WelcomeTermsTapped():
+        LegalDocumentSheet.show(
           context: context,
-          type: LegalDocumentType.terms,
-          termsUrl: strings.termsUrl,
-          privacyUrl: strings.privacyUrl,
+          title: _viewModel.uiState.termsText,
+          url: '${AppConfig.legalBaseUrl}/terms-of-service',
+          isRemoteEnabled: AppConfig.remoteLegalDocsEnabled,
         );
         break;
-      case WelcomePrivacyClicked():
-        final strings = _viewModel.uiState.strings;
-        showLegalDocumentSheet(
+      case WelcomePrivacyTapped():
+        LegalDocumentSheet.show(
           context: context,
-          type: LegalDocumentType.privacy,
-          termsUrl: strings.termsUrl,
-          privacyUrl: strings.privacyUrl,
+          title: _viewModel.uiState.privacyText,
+          url: '${AppConfig.legalBaseUrl}/privacy-policy',
+          isRemoteEnabled: AppConfig.remoteLegalDocsEnabled,
         );
         break;
     }
   }
 
-  Future<void> _openLanguageSheet() async {
-    final manager = LanguageScope.read(context);
-    final strings = AppLocalizedStrings.from(manager.currentLanguage);
-    final selectedLanguage = await showLanguageBottomSheet(
-      context: context,
-      selectedLanguage: manager.currentLanguage,
-      title: strings.selectLanguageTitle,
-      subtitle: strings.selectLanguageSubtitle,
-      searchHint: strings.searchLanguageHint,
-      noResultsText: strings.noLanguageResultsText,
-    );
-    if (selectedLanguage == null) return;
-    manager.setLanguage(selectedLanguage);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final languageManager = LanguageScope.watch(context);
-    final strings = AppLocalizedStrings.from(languageManager.currentLanguage);
-    _viewModel.syncLocalizedStrings(strings);
-
     return AnimatedBuilder(
       animation: _viewModel,
       builder: (context, _) {
         return WelcomeScreen(
-          uiState: _viewModel.uiState,
+          state: _viewModel.uiState,
           onAction: _onAction,
         );
       },

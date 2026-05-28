@@ -1,49 +1,53 @@
 import 'package:flutter/foundation.dart';
-import 'package:tnyx_mobile/core/language/app_language.dart';
-import 'package:tnyx_mobile/core/language/app_localized_strings.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_contract.dart';
 
 class WelcomeViewModel extends ChangeNotifier {
-  WelcomeViewModel()
-    : _uiState = WelcomeUiState(
-        strings: AppLocalizedStrings.from(AppLanguage.english),
-        subtitle: _subtitleByLocaleCode('EN'),
-      );
-
-  WelcomeUiState _uiState;
+  WelcomeUiState _uiState = const WelcomeUiState();
 
   WelcomeUiState get uiState => _uiState;
 
-  void syncLocalizedStrings(AppLocalizedStrings strings) {
-    final nextSubtitle = _subtitleByLocaleCode(strings.localeCode);
-    final didChange =
-        _uiState.strings.localeCode != strings.localeCode ||
-        _uiState.subtitle != nextSubtitle;
-
-    if (!didChange) return;
-    _uiState = _uiState.copyWith(strings: strings, subtitle: nextSubtitle);
-    notifyListeners();
-  }
-
   void onAction(WelcomeAction action) {
     switch (action) {
+      case WelcomeLanguageChanged(localeCode: final code):
+        _handleLanguageChange(code);
       case WelcomeGetStartedClicked():
-        return;
+        // Logic for Get Started
+        break;
       case WelcomeSignInClicked():
-        return;
+        // Logic for Sign In
+        break;
       case WelcomeSkipForNowClicked():
-        return;
-      case WelcomeLanguageClicked():
-      case WelcomeTermsClicked():
-      case WelcomePrivacyClicked():
-        return;
+        // Logic for Skip
+        break;
+      case WelcomeTermsTapped():
+      case WelcomePrivacyTapped():
+        // Handled in Route
+        break;
     }
   }
-}
 
-String _subtitleByLocaleCode(String localeCode) {
-  if (localeCode == 'HI') {
-    return 'Nutrition, workouts aur recovery ko ek smart flow me manage karein.';
+  void _handleLanguageChange(String code) {
+    final normalizedCode = code.toLowerCase();
+    if (normalizedCode == 'hi') {
+      _uiState = _uiState.copyWith(
+        localeCode: 'HI',
+        skipText: 'छोड़ें',
+        title: 'वसा घटाएं। मांसपेशियों का निर्माण करें।\nनिरंतर बने रहें।',
+        featureLines: [
+          'फोटो, आवाज या टेक्स्ट के साथ भोजन लॉग करें',
+          'व्यक्तिगत वर्कआउट के साथ प्रो की तरह ट्रेन करें',
+          'एआई से रीयल-टाइम अंतर्दृष्टि प्राप्त करें',
+        ],
+        ctaText: 'शुरू करें',
+        signInText: 'साइन इन करें',
+        termsPrefix: 'ऐप का उपयोग जारी रखकर, आप हमारे ',
+        termsText: 'नियम और शर्तें',
+        andText: ' और ',
+        privacyText: 'गोपनीयता नीति स्वीकार करते हैं।',
+      );
+    } else {
+      _uiState = const WelcomeUiState(localeCode: 'EN');
+    }
+    notifyListeners();
   }
-  return 'Track nutrition, workouts, and recovery in one smart flow.';
 }
