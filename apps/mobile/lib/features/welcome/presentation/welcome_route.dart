@@ -37,6 +37,9 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
       case WelcomeSkipForNowClicked():
         // Skip flow route will be wired here.
         break;
+      case WelcomeLanguageChanged():
+        // Language change is handled inside ViewModel
+        break;
     }
   }
 

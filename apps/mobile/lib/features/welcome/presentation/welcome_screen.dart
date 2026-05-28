@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tnyx_mobile/core/theme/app_dimens.dart';
+import 'package:tnyx_mobile/core/theme/app_typography.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_contract.dart';
+import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_backdrop.dart';
+import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_disclaimer.dart';
+import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_feature_tile.dart';
+import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_actions.dart';
+import 'package:tnyx_mobile/features/welcome/presentation/widgets/language_selection_sheet.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({
@@ -14,119 +20,146 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dims = context.dimens;
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
 
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/images/welcome_hero.png',
-            fit: BoxFit.cover,
+          // Hero Image
+          Align(
+            alignment: const Alignment(0, -1.68),
+            child: FractionallySizedBox(
+              widthFactor: 1,
+              heightFactor: 0.75,
+              child: Image.asset(
+                'assets/images/welcome_hero.png',
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+              ),
+            ),
           ),
-          const _BackdropLayer(),
+
+          const WelcomeBackdrop(),
+
           SafeArea(
             child: LayoutBuilder(
               builder: (context, constraints) {
-                return SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: dims.spacing20,
-                    vertical: dims.spacing16,
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    left: TnyxDimens.paddingScreen,
+                    right: TnyxDimens.paddingScreen,
+                    top: TnyxDimens.spaceXS,
+                    bottom: TnyxDimens.spaceNone,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            state.localeCode,
-                            style: textTheme.bodyLarge?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () =>
-                                onAction(const WelcomeSkipForNowClicked()),
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              textStyle: textTheme.bodyLarge?.copyWith(
-                                fontWeight: FontWeight.w600,
+                  child: SizedBox.expand(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Updated Top Bar
+                        _TopBar(
+                          localeCode: state.localeCode,
+                          skipText: state.skipText,
+                          onSkip: () {
+                            onAction(const WelcomeSkipForNowClicked());
+                          },
+                          onLanguageTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(TnyxDimens.radiusCard),
+                                ),
+                              ),
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              builder: (context) => LanguageSelectionSheet(
+                                currentLocale: state.localeCode,
+                                onLanguageSelected: (newLang) {
+                                  onAction(WelcomeLanguageChanged(newLang));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            );
+                          },
+                        ),
+
+                        const Spacer(flex: 2),
+
+                        // Title and Features
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.title,
+                              style: TnyxTypography.textTheme.displayMedium?.copyWith(
+                                color: theme.colorScheme.onSurface,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            child: Text(state.skipText),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: constraints.maxHeight * 0.22),
-                      Text(
-                        state.title,
-                        style: textTheme.displayMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          height: 1.1,
-                        ),
-                      ),
-                      SizedBox(height: dims.spacing20),
-                      ...state.featureLines.map(
-                        (feature) => Padding(
-                          padding: EdgeInsets.only(bottom: dims.spacing12),
-                          child: _FeatureTile(text: feature),
-                        ),
-                      ),
-                      SizedBox(height: dims.spacing8),
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed: () =>
-                              onAction(const WelcomeGetStartedClicked()),
-                          style: FilledButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                            padding:
-                                EdgeInsets.symmetric(vertical: dims.spacing16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(dims.radius12),
+
+                            SizedBox(height: TnyxDimens.spaceS),
+
+                            // Dynamic Feature Tiles with Icons
+                            ...state.featureLines.asMap().entries.map(
+                                  (entry) {
+                                final index = entry.key;
+                                final feature = entry.value;
+
+                                // Icon mapping based on your React Native code
+                                final IconData featureIcon;
+                                switch (index) {
+                                  case 0:
+                                    featureIcon = Icons.camera_alt_outlined;
+                                    break;
+                                  case 1:
+                                    featureIcon = Icons.fitness_center_outlined;
+                                    break;
+                                  case 2:
+                                    featureIcon = Icons.psychology_outlined;
+                                    break;
+                                  default:
+                                    featureIcon = Icons.check_circle_outline;
+                                }
+
+                                return Padding(
+                                  padding: EdgeInsets.only(bottom: TnyxDimens.spaceS),
+                                  child: WelcomeFeatureTile(
+                                    text: feature,
+                                    icon: featureIcon,
+                                  ),
+                                );
+                              },
                             ),
-                          ),
-                          child: Text(
-                            state.ctaText,
-                            style: textTheme.labelLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: dims.spacing12),
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed: () =>
-                              onAction(const WelcomeSignInClicked()),
-                          style: FilledButton.styleFrom(
-                            backgroundColor: const Color(0xFF16181E),
-                            foregroundColor: Colors.white,
-                            padding:
-                                EdgeInsets.symmetric(vertical: dims.spacing16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(dims.radius12),
-                            ),
-                          ),
-                          child: Text(
-                            state.signInText,
-                            style: textTheme.labelLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+
+                        SizedBox(height: TnyxDimens.spaceM),
+
+                        // Actions
+                        WelcomePrimaryButton(
+                          text: state.ctaText,
+                          onPressed: () {
+                            onAction(const WelcomeGetStartedClicked());
+                          },
                         ),
-                      ),
-                      SizedBox(height: dims.spacing12),
-                      _DisclaimerText(state: state),
-                    ],
+
+                        SizedBox(height: TnyxDimens.spaceSM),
+
+                        WelcomeSecondaryButton(
+                          text: state.signInText,
+                          onPressed: () {
+                            onAction(const WelcomeSignInClicked());
+                          },
+                        ),
+
+                        SizedBox(height: TnyxDimens.spaceM),
+
+                        // Updated Disclaimer
+                        WelcomeDisclaimer(state: state),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -138,102 +171,64 @@ class WelcomeScreen extends StatelessWidget {
   }
 }
 
-class _BackdropLayer extends StatelessWidget {
-  const _BackdropLayer();
+class _TopBar extends StatelessWidget {
+  const _TopBar({
+    required this.localeCode,
+    required this.skipText,
+    required this.onSkip,
+    required this.onLanguageTap,
+  });
+
+  final String localeCode;
+  final String skipText;
+  final VoidCallback onSkip;
+  final VoidCallback onLanguageTap;
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.black.withValues(alpha: 0.12),
-            Colors.black.withValues(alpha: 0.46),
-            Colors.black.withValues(alpha: 0.78),
-            Colors.black.withValues(alpha: 0.93),
-          ],
-          stops: const [0.0, 0.35, 0.7, 1.0],
-        ),
-      ),
+    final theme = Theme.of(context);
+
+    // हेडर के लिए कॉमन टेक्स्ट स्टाइल
+    final headerStyle = TnyxTypography.textTheme.titleMedium?.copyWith(
+      color: theme.colorScheme.onSurface,
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 0.5,
     );
-  }
-}
 
-class _FeatureTile extends StatelessWidget {
-  const _FeatureTile({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: const Color(0xFF0D0F14).withValues(alpha: 0.94),
-        borderRadius: BorderRadius.circular(22),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 2),
-            child: Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 20,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // Language Code (e.g., EN) - Now Clickable
+        InkWell(
+          onTap: onLanguageTap,
+          borderRadius: BorderRadius.circular(TnyxDimens.radiusPill),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: TnyxDimens.spaceS,
+              vertical: TnyxDimens.spaceXS,
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
             child: Text(
-              text,
-              style: textTheme.bodyLarge?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                height: 1.2,
-              ),
+              localeCode.toUpperCase(),
+              style: headerStyle,
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DisclaimerText extends StatelessWidget {
-  const _DisclaimerText({required this.state});
-
-  final WelcomeUiState state;
-
-  @override
-  Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: Colors.white70,
-          fontSize: 14,
-          height: 1.3,
-        );
-    final linkStyle = style?.copyWith(
-      decoration: TextDecoration.underline,
-      color: Colors.white70,
-    );
-
-    return Center(
-      child: Text.rich(
-        TextSpan(
-          style: style,
-          children: [
-            TextSpan(text: state.termsPrefix),
-            TextSpan(text: state.termsText, style: linkStyle),
-            TextSpan(text: state.andText),
-            TextSpan(text: state.privacyText, style: linkStyle),
-          ],
         ),
-        textAlign: TextAlign.center,
-      ),
+
+        // Skip Button
+        TextButton(
+          onPressed: onSkip,
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: TnyxDimens.spaceS),
+            minimumSize: Size.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+          child: Text(
+            skipText,
+            style: headerStyle,
+          ),
+        ),
+      ],
     );
   }
 }

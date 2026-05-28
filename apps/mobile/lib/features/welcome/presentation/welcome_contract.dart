@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 class WelcomeUiState {
   const WelcomeUiState({
     this.localeCode = 'EN',
-    this.skipText = 'Skip for now',
+    this.skipText = 'Skip',
     this.title = 'Lose Fat. Build Muscle.\nStay Consistent.',
     this.featureLines = const <String>[
       'Log meals with photos, voice, or text',
@@ -29,6 +29,32 @@ class WelcomeUiState {
   final String termsText;
   final String andText;
   final String privacyText;
+
+  WelcomeUiState copyWith({
+    String? localeCode,
+    String? skipText,
+    String? title,
+    List<String>? featureLines,
+    String? ctaText,
+    String? signInText,
+    String? termsPrefix,
+    String? termsText,
+    String? andText,
+    String? privacyText,
+  }) {
+    return WelcomeUiState(
+      localeCode: localeCode ?? this.localeCode,
+      skipText: skipText ?? this.skipText,
+      title: title ?? this.title,
+      featureLines: featureLines ?? this.featureLines,
+      ctaText: ctaText ?? this.ctaText,
+      signInText: signInText ?? this.signInText,
+      termsPrefix: termsPrefix ?? this.termsPrefix,
+      termsText: termsText ?? this.termsText,
+      andText: andText ?? this.andText,
+      privacyText: privacyText ?? this.privacyText,
+    );
+  }
 }
 
 sealed class WelcomeAction {
@@ -45,4 +71,9 @@ class WelcomeSignInClicked extends WelcomeAction {
 
 class WelcomeSkipForNowClicked extends WelcomeAction {
   const WelcomeSkipForNowClicked();
+}
+
+class WelcomeLanguageChanged extends WelcomeAction {
+  final String localeCode;
+  const WelcomeLanguageChanged(this.localeCode);
 }

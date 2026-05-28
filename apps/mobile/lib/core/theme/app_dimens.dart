@@ -1,86 +1,224 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-@immutable
-class TnyxDimens extends ThemeExtension<TnyxDimens> {
-  const TnyxDimens({
-    this.spacing4 = 4,
-    this.spacing8 = 8,
-    this.spacing12 = 12,
-    this.spacing16 = 16,
-    this.spacing20 = 20,
-    this.spacing24 = 24,
-    this.spacing32 = 32,
-    this.spacing40 = 40,
-    this.radius12 = 12,
-    this.radius20 = 20,
-  });
+sealed class TnyxDimens {
+  TnyxDimens._();
 
-  final double spacing4;
-  final double spacing8;
-  final double spacing12;
-  final double spacing16;
-  final double spacing20;
-  final double spacing24;
-  final double spacing32;
-  final double spacing40;
-  final double radius12;
-  final double radius20;
+  /* -------------------------------------------------------------------------- */
+  /*                                   SPACING                                  */
+  /* -------------------------------------------------------------------------- */
 
-  static const TnyxDimens defaults = TnyxDimens();
+  static const double spaceNone = 0;
 
-  @override
-  ThemeExtension<TnyxDimens> copyWith({
-    double? spacing4,
-    double? spacing8,
-    double? spacing12,
-    double? spacing16,
-    double? spacing20,
-    double? spacing24,
-    double? spacing32,
-    double? spacing40,
-    double? radius12,
-    double? radius20,
-  }) {
-    return TnyxDimens(
-      spacing4: spacing4 ?? this.spacing4,
-      spacing8: spacing8 ?? this.spacing8,
-      spacing12: spacing12 ?? this.spacing12,
-      spacing16: spacing16 ?? this.spacing16,
-      spacing20: spacing20 ?? this.spacing20,
-      spacing24: spacing24 ?? this.spacing24,
-      spacing32: spacing32 ?? this.spacing32,
-      spacing40: spacing40 ?? this.spacing40,
-      radius12: radius12 ?? this.radius12,
-      radius20: radius20 ?? this.radius20,
-    );
-  }
+  static const double spaceXXS = 2;
+  static const double spaceXS = 4;
+  static const double spaceS = 8;
+  static const double spaceSM = 12;
+  static const double spaceM = 16;
+  static const double spaceL = 24;
+  static const double spaceXL = 32;
+  static const double spaceXXL = 40;
+  static const double spaceXXXL = 48;
 
-  @override
-  ThemeExtension<TnyxDimens> lerp(
-    covariant ThemeExtension<TnyxDimens>? other,
-    double t,
-  ) {
-    if (other is! TnyxDimens) {
-      return this;
-    }
-    return TnyxDimens(
-      spacing4: _lerp(spacing4, other.spacing4, t),
-      spacing8: _lerp(spacing8, other.spacing8, t),
-      spacing12: _lerp(spacing12, other.spacing12, t),
-      spacing16: _lerp(spacing16, other.spacing16, t),
-      spacing20: _lerp(spacing20, other.spacing20, t),
-      spacing24: _lerp(spacing24, other.spacing24, t),
-      spacing32: _lerp(spacing32, other.spacing32, t),
-      spacing40: _lerp(spacing40, other.spacing40, t),
-      radius12: _lerp(radius12, other.radius12, t),
-      radius20: _lerp(radius20, other.radius20, t),
-    );
-  }
+  /* -------------------------------------------------------------------------- */
+  /*                                   PADDING                                  */
+  /* -------------------------------------------------------------------------- */
 
-  static double _lerp(double a, double b, double t) => a + (b - a) * t;
-}
+  static const double paddingScreen = spaceM;
+  static const double paddingScreenLarge = spaceL;
 
-extension ThemeDimensX on BuildContext {
-  TnyxDimens get dimens =>
-      Theme.of(this).extension<TnyxDimens>() ?? TnyxDimens.defaults;
+  static const double paddingCard = spaceM;
+  static const double paddingContent = spaceSM;
+  static const double paddingItem = spaceSM;
+
+  static const double paddingButtonHorizontal = spaceM;
+  static const double paddingButtonVertical = spaceS;
+
+  static const double paddingInputHorizontal = spaceM;
+  static const double paddingInputVertical = spaceS;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    RADIUS                                  */
+  /* -------------------------------------------------------------------------- */
+
+  static const double radiusNone = 0;
+
+  static const double radiusXS = 6;
+  static const double radiusS = 8;
+  static const double radiusM = 12;
+  static const double radiusL = 16;
+  static const double radiusXL = 24;
+  static const double radiusXXL = 32;
+
+  static const double radiusPill = 999;
+
+  /* -------------------------------------------------------------------------- */
+  /*                               SEMANTIC RADIUS                              */
+  /* -------------------------------------------------------------------------- */
+
+  static const double radiusCard = radiusL;
+  static const double radiusSheet = radiusXL;
+  static const double radiusDialog = radiusXL;
+
+  static const double radiusList = radiusS;
+  static const double radiusItem = radiusM;
+
+  static const double radiusButton = radiusM;
+  static const double radiusInput = radiusM;
+
+  static const double radiusChip = radiusPill;
+  static const double radiusAvatar = radiusPill;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     SIZE                                   */
+  /* -------------------------------------------------------------------------- */
+
+  static const double buttonHeight = 52;
+  static const double buttonHeightSmall = 42;
+  static const double buttonHeightLarge = 56;
+
+  static const double inputHeight = 54;
+  static const double inputHeightSmall = 46;
+
+  static const double chipHeight = 36;
+
+  static const double avatarSize = 44;
+  static const double avatarSizeSmall = 32;
+  static const double avatarSizeLarge = 64;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     ICONS                                  */
+  /* -------------------------------------------------------------------------- */
+
+  static const double iconXS = 14;
+  static const double iconS = 16;
+  static const double iconM = 24;
+  static const double iconL = 32;
+  static const double iconXL = 48;
+  static const double iconXXL = 64;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    BORDER                                  */
+  /* -------------------------------------------------------------------------- */
+
+  static const double borderHairline = 0.5;
+  static const double borderThin = 1;
+  static const double borderThick = 1.5;
+  static const double borderBold = 2;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  ELEVATION                                 */
+  /* -------------------------------------------------------------------------- */
+
+  static const double elevationNone = 0;
+  static const double elevationS = 1;
+  static const double elevationM = 2;
+  static const double elevationL = 4;
+  static const double elevationXL = 8;
+
+  static const double elevationCard = elevationS;
+  static const double elevationButton = elevationNone;
+  static const double elevationItem = elevationS;
+  static const double elevationDialog = elevationXL;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   APP BARS                                 */
+  /* -------------------------------------------------------------------------- */
+
+  static const double topBarHeight = 56;
+  static const double topBarIcon = iconM;
+  static const double topBarPaddingHorizontal = spaceM;
+
+  static const double bottomBarHeight = 56;
+  static const double bottomBarItemHeight = 48;
+  static const double bottomBarIcon = iconM;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                  NAVIGATION                                */
+  /* -------------------------------------------------------------------------- */
+
+  static const double navRailWidth = 80;
+  static const double bottomNavHeight = bottomBarHeight;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                CARDS / LISTS                               */
+  /* -------------------------------------------------------------------------- */
+
+  static const double cardMinHeight = 88;
+
+  static const double listItemMinHeight = 56;
+  static const double listItemAvatar = avatarSize;
+
+  static const double dividerHeight = borderHairline;
+
+  /* -------------------------------------------------------------------------- */
+  /*                              PROGRESS / HEALTH                             */
+  /* -------------------------------------------------------------------------- */
+
+  static const double progressBarHeight = 8;
+  static const double progressBarHeightSmall = 4;
+
+  static const double ringStrokeWidth = 8;
+  static const double ringStrokeWidthSmall = 6;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                   AI COACH                                 */
+  /* -------------------------------------------------------------------------- */
+
+  static const double aiChatInputHeight = 54;
+  static const double aiChatSendButton = 46;
+
+  static const double aiChatOuterRing = 56;
+
+  static const double aiChatMessageMaxWidthFraction = 0.82;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                DIALOG / SHEET                              */
+  /* -------------------------------------------------------------------------- */
+
+  static const double dialogMinWidth = 280;
+
+  static const double dialogInputHeight = inputHeightSmall;
+
+  static const double sheetHandleWidth = 40;
+  static const double sheetHandleHeight = 4;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    SCREEN                                  */
+  /* -------------------------------------------------------------------------- */
+
+  static const double screenMaxContentWidth = 560;
+
+  /* -------------------------------------------------------------------------- */
+  /*                                EDGE INSETS                                 */
+  /* -------------------------------------------------------------------------- */
+
+  static const EdgeInsets screenPadding = EdgeInsets.all(
+    paddingScreen,
+  );
+
+  static const EdgeInsets screenPaddingLarge = EdgeInsets.all(
+    paddingScreenLarge,
+  );
+
+  static const EdgeInsets cardPadding = EdgeInsets.all(
+    paddingCard,
+  );
+
+  static const EdgeInsets contentPadding = EdgeInsets.all(
+    paddingContent,
+  );
+
+  static const EdgeInsets itemPadding = EdgeInsets.all(
+    paddingItem,
+  );
+
+  static const EdgeInsets buttonPadding = EdgeInsets.symmetric(
+    horizontal: paddingButtonHorizontal,
+    vertical: paddingButtonVertical,
+  );
+
+  static const EdgeInsets inputPadding = EdgeInsets.symmetric(
+    horizontal: paddingInputHorizontal,
+    vertical: paddingInputVertical,
+  );
 }
