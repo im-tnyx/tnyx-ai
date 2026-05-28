@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tnyx_mobile/core/theme/app_dimens.dart';
 import 'package:tnyx_mobile/core/theme/app_typography.dart';
+import 'package:tnyx_mobile/core/language/app_language.dart';
+import 'package:tnyx_mobile/core/language/widgets/language_bottom_sheet.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_contract.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_backdrop.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_disclaimer.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_feature_tile.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/widgets/welcome_actions.dart';
-import 'package:tnyx_mobile/features/welcome/presentation/widgets/language_selection_sheet.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({
@@ -63,25 +64,18 @@ class WelcomeScreen extends StatelessWidget {
                           onSkip: () {
                             onAction(const WelcomeSkipForNowClicked());
                           },
-                          onLanguageTap: () {
-                            showModalBottomSheet(
+                          onLanguageTap: () async {
+                            final selected = await showLanguageBottomSheet(
                               context: context,
-                              backgroundColor: Colors.transparent,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(TnyxDimens.radiusCard),
-                                ),
-                              ),
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              builder: (context) => LanguageSelectionSheet(
-                                currentLocale: state.localeCode,
-                                onLanguageSelected: (newLang) {
-                                  onAction(WelcomeLanguageChanged(newLang));
-                                  Navigator.pop(context);
-                                },
-                              ),
+                              selectedLanguage: AppLanguage.fromCode(state.localeCode),
+                              title: 'Select Language',
+                              subtitle: 'Choose your preferred language for the app',
+                              searchHint: 'Search language...',
+                              noResultsText: 'No languages found',
                             );
+                            if (selected != null) {
+                              onAction(WelcomeLanguageChanged(selected.code));
+                            }
                           },
                         ),
 
@@ -157,7 +151,10 @@ class WelcomeScreen extends StatelessWidget {
                         SizedBox(height: TnyxDimens.spaceM),
 
                         // Updated Disclaimer
-                        WelcomeDisclaimer(state: state),
+                        WelcomeDisclaimer(
+                          state: state,
+                          onAction: onAction,
+                        ),
                       ],
                     ),
                   ),

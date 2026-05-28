@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tnyx_mobile/core/language/app_language.dart';
+import 'package:tnyx_mobile/core/theme/app_dimens.dart';
 
 Future<AppLanguage?> showLanguageBottomSheet({
   required BuildContext context,
@@ -46,8 +47,6 @@ class _LanguageBottomSheet extends StatefulWidget {
 }
 
 class _LanguageBottomSheetState extends State<_LanguageBottomSheet> {
-  final TextEditingController _searchController = TextEditingController();
-  String _query = '';
   late AppLanguage _selectedLanguage;
 
   @override
@@ -57,32 +56,10 @@ class _LanguageBottomSheetState extends State<_LanguageBottomSheet> {
   }
 
   @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  List<AppLanguage> get _filteredLanguages {
-    final query = _query.trim().toLowerCase();
-    if (query.isEmpty) return AppLanguage.values;
-
-    return AppLanguage.values.where((language) {
-      final searchable = <String>[
-        language.code,
-        language.shortLabel,
-        language.displayName,
-        language.nativeName,
-        language.optionLabel,
-      ].join(' ').toLowerCase();
-      return searchable.contains(query);
-    }).toList();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final filteredLanguages = _filteredLanguages;
+    final languages = AppLanguage.values;
 
     return SafeArea(
       child: Padding(
@@ -110,67 +87,35 @@ class _LanguageBottomSheetState extends State<_LanguageBottomSheet> {
                 color: colors.onSurface.withOpacity(0.7),
               ),
             ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: _searchController,
-              onChanged: (value) => setState(() => _query = value),
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                hintText: widget.searchHint,
-                prefixIcon: const Icon(Icons.search_rounded),
-                isDense: true,
-                filled: true,
-                fillColor: colors.surfaceVariant.withOpacity(0.3),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide(color: colors.outlineVariant),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide(color: colors.outlineVariant),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide(color: colors.primary, width: 1.4),
-                ),
-              ),
-            ),
-            const SizedBox(height: 14),
-            if (filteredLanguages.isEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Center(
-                  child: Text(
-                    widget.noResultsText,
-                    style: textTheme.bodyLarge?.copyWith(
-                      color: colors.onSurface.withOpacity(0.75),
-                    ),
+            const SizedBox(height: 20),
+            ...List<Widget>.generate(
+              languages.length,
+              (index) {
+                final language = languages[index];
+                final isSelected = language == _selectedLanguage;
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: index == languages.length - 1 ? 0 : 10,
                   ),
-                ),
-              )
-            else
-              ...List<Widget>.generate(
-                filteredLanguages.length,
-                (index) {
-                  final language = filteredLanguages[index];
-                  final isSelected = language == _selectedLanguage;
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      bottom: index == filteredLanguages.length - 1 ? 0 : 10,
-                    ),
-                    child: _LanguageOptionTile(
-                      language: language,
-                      isSelected: isSelected,
-                      onTap: () => setState(() => _selectedLanguage = language),
-                    ),
-                  );
-                },
-              ),
-            const SizedBox(height: 16),
+                  child: _LanguageOptionTile(
+                    language: language,
+                    isSelected: isSelected,
+                    onTap: () => setState(() => _selectedLanguage = language),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
+              height: TnyxDimens.buttonHeightLarge,
               child: FilledButton(
                 onPressed: () => Navigator.of(context).pop(_selectedLanguage),
+                style: FilledButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(TnyxDimens.radiusButton),
+                  ),
+                ),
                 child: const Text('Apply'),
               ),
             ),

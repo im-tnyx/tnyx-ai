@@ -19,11 +19,16 @@ class WelcomeViewModel extends ChangeNotifier {
       case WelcomeSkipForNowClicked():
         // Logic for Skip
         break;
+      case WelcomeTermsTapped():
+      case WelcomePrivacyTapped():
+        // Handled in Route
+        break;
     }
   }
 
   void _handleLanguageChange(String code) {
-    if (code == 'HI') {
+    final normalizedCode = code.toLowerCase();
+    if (normalizedCode == 'hi') {
       _uiState = _uiState.copyWith(
         localeCode: 'HI',
         skipText: 'छोड़ें',

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tnyx_mobile/core/config/app_config.dart';
+import 'package:tnyx_mobile/core/legal/legal_document_sheet.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_contract.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_screen.dart';
 import 'package:tnyx_mobile/features/welcome/presentation/welcome_view_model.dart';
@@ -39,6 +41,22 @@ class _WelcomeRouteState extends State<WelcomeRoute> {
         break;
       case WelcomeLanguageChanged():
         // Language change is handled inside ViewModel
+        break;
+      case WelcomeTermsTapped():
+        LegalDocumentSheet.show(
+          context: context,
+          title: _viewModel.uiState.termsText,
+          url: '${AppConfig.legalBaseUrl}/terms-of-service',
+          isRemoteEnabled: AppConfig.remoteLegalDocsEnabled,
+        );
+        break;
+      case WelcomePrivacyTapped():
+        LegalDocumentSheet.show(
+          context: context,
+          title: _viewModel.uiState.privacyText,
+          url: '${AppConfig.legalBaseUrl}/privacy-policy',
+          isRemoteEnabled: AppConfig.remoteLegalDocsEnabled,
+        );
         break;
     }
   }
