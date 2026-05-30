@@ -136,10 +136,11 @@ class _TnyxParticleState extends State<TnyxParticle> with TickerProviderStateMix
             AnimatedBuilder(
               animation: _ringAlphaAnimation,
               builder: (context, child) {
+                final colors = Theme.of(context).colorScheme;
                 return CustomPaint(
                   size: const Size(48, 48),
                   painter: _RingPainter(
-                    color: const Color(0xFF00D2FF).withValues(alpha: _ringAlphaAnimation.value),
+                    color: colors.primary.withOpacity(_ringAlphaAnimation.value),
                     strokeWidth: _pressController.isAnimating || _pressController.value > 0.5 ? 2.4 : 1.1,
                   ),
                 );
@@ -226,13 +227,13 @@ class _ParticlePainter extends CustomPainter {
 
       // Draw Main Particle
       final mainPaint = Paint()
-        ..color = p.color.withValues(alpha: isPressed ? 1.0 : 0.82)
+        ..color = p.color.withOpacity(isPressed ? 1.0 : 0.82)
         ..style = PaintingStyle.fill;
       canvas.drawCircle(center, finalRadius, mainPaint);
 
       // Draw Outer Glow/Stroke
       final strokePaint = Paint()
-        ..color = Colors.white.withValues(alpha: isPressed ? 0.20 : 0.08)
+        ..color = Colors.white.withOpacity(isPressed ? 0.20 : 0.08)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 0.5;
       canvas.drawCircle(center, finalRadius + 0.5, strokePaint);

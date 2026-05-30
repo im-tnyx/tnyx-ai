@@ -18,7 +18,7 @@ class HomeStatsCard extends StatelessWidget {
         color: colors.surfaceContainer, 
         borderRadius: BorderRadius.circular(TnyxDimens.radiusXL),
         border: Border.all(
-          color: colors.onSurface.withValues(alpha: 0.08),
+          color: colors.onSurface.withOpacity(0.08),
           width: 1,
         ),
       ),
@@ -96,14 +96,14 @@ class _StatItem extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                color: colors.onSurface.withValues(alpha: 0.9),
+                color: colors.onSurface.withOpacity(0.9),
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 14),
+        const SizedBox(height: 16),
         Stack(
           alignment: Alignment.center,
           children: [
@@ -113,7 +113,7 @@ class _StatItem extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: colors.onSurface.withValues(alpha: 0.08),
+                  color: colors.onSurface.withOpacity(0.08),
                   width: 4,
                 ),
               ),
@@ -133,7 +133,7 @@ class _StatItem extends StatelessWidget {
             Text(
               value,
               style: TextStyle(
-                color: colors.onSurface.withValues(alpha: value == '--' ? 0.3 : 1.0),
+                color: colors.onSurface.withOpacity(value == '--' ? 0.3 : 1.0),
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -152,10 +152,10 @@ class _VerticalDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 1,
-      height: 40,
+      width: 2,
+      height: 65,
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      color: colors.onSurface.withValues(alpha: 0.05),
+      color: colors.onSurface.withOpacity(0.05),
     );
   }
 }

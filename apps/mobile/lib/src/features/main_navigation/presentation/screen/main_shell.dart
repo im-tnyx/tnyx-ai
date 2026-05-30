@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tnyx_mobile/src/core/theme/tokens/app_dimens.dart';
 import 'package:tnyx_mobile/src/features/main_navigation/presentation/state/shell_ui_state.dart';
 import 'package:tnyx_mobile/src/features/main_navigation/presentation/action/shell_action.dart';
 import 'package:tnyx_mobile/src/features/main_navigation/presentation/widgets/main_bottom_nav.dart';
@@ -21,11 +20,12 @@ class MainShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final showTopBar = uiState.selectedTab == ShellTab.home;
+    // AI स्क्रीन पर नेविगेशन बार छिपाने के लिए
+    final showBottomNav = uiState.selectedTab != ShellTab.ai;
 
     return Scaffold(
       extendBody: true,
       backgroundColor: colors.surface,
-      // AppBar हटा दिया गया है ताकि हम Stack का उपयोग कर सकें
       body: Stack(
         children: [
           // Main Content
@@ -34,7 +34,7 @@ class MainShell extends StatelessWidget {
             children: tabs,
           ),
 
-          // Floating Top Bar with Gradient reaching the edge
+          // Floating Top Bar
           if (showTopBar)
             Positioned(
               top: 0,
@@ -47,10 +47,13 @@ class MainShell extends StatelessWidget {
             ),
         ],
       ),
-      bottomNavigationBar: MainBottomNav(
-        selectedTab: uiState.selectedTab,
-        onAction: onAction,
-      ),
+      // सशर्त रूप से बॉटम नेव रेंडर करना
+      bottomNavigationBar: showBottomNav 
+          ? MainBottomNav(
+              selectedTab: uiState.selectedTab,
+              onAction: onAction,
+            )
+          : null,
     );
   }
 }

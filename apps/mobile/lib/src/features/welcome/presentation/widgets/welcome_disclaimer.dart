@@ -20,14 +20,14 @@ class WelcomeDisclaimer extends StatelessWidget {
     final theme = Theme.of(context);
 
     final baseStyle = TnyxTypography.textTheme.bodySmall?.copyWith(
-      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+      color: theme.colorScheme.onSurface.withOpacity(0.7),
     );
 
     final linkStyle = TnyxTypography.textTheme.bodySmall?.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
       decoration: TextDecoration.underline,
-      decorationColor: theme.colorScheme.primary.withValues(alpha: 0.5),
+      decorationColor: theme.colorScheme.primary.withOpacity(0.5),
     );
 
     return Padding(

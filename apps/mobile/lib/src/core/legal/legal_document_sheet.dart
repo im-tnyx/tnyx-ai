@@ -17,7 +17,7 @@ class LegalDocumentSheet {
       context: context,
       barrierDismissible: true,
       barrierLabel: 'LegalDocument',
-      barrierColor: Colors.black.withValues(alpha: 0.5),
+      barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (context, animation, secondaryAnimation) {
         return LegalDocumentRoute(

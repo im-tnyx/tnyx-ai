@@ -1,86 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:tnyx_mobile/src/core/theme/tokens/app_colors.dart';
 import 'package:tnyx_mobile/src/core/theme/components/app_bar_theme.dart';
 import 'package:tnyx_mobile/src/core/theme/components/app_card_theme.dart';
-import 'package:tnyx_mobile/src/core/theme/tokens/app_colors.dart';
 import 'package:tnyx_mobile/src/core/theme/components/app_input_theme.dart';
 import 'package:tnyx_mobile/src/core/theme/components/app_navigation_theme.dart';
 import 'package:tnyx_mobile/src/core/theme/components/app_sheet_theme.dart';
+import 'package:tnyx_mobile/src/core/theme/components/app_button_theme.dart';
 import 'package:tnyx_mobile/src/core/theme/tokens/app_typography.dart';
 
 class TnyxTheme {
-  // [TAG: LIGHT SCHEMA SPECIFICATION]
-  static ThemeData get lightTheme {
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.light,
-      colorScheme: const ColorScheme.light(
-        primary: TnyxColors.lightHighContrastText,
-        onPrimary: TnyxColors.lightCanvasBackground,
-        secondary: TnyxColors.actionCore,
-        onSecondary: TnyxColors.lightCanvasBackground,
-        primaryContainer: TnyxColors.lightSurfaceContainer,
-        
-        surface: TnyxColors.lightCanvasBackground,
-        onSurface: TnyxColors.lightHighContrastText,
-        surfaceContainer: TnyxColors.lightSurfaceContainer,
-        onSurfaceVariant: TnyxColors.lightLowContrastText,
-        
-        outline: TnyxColors.lightComponentOutline,
-        outlineVariant: TnyxColors.lightComponentOutline,
-        
-        error: TnyxColors.alertCritical,
-        onError: TnyxColors.lightOnSystemState,
-        errorContainer: TnyxColors.alertWarning,
-        onErrorContainer: TnyxColors.lightOnSystemWarning,
-        
-        tertiary: TnyxColors.alertSuccess,
-        onTertiary: TnyxColors.lightOnSystemState,
-      ),
-      scaffoldBackgroundColor: TnyxColors.lightCanvasBackground,
-      appBarTheme: TnyxAppBarTheme.light,
-      cardTheme: TnyxCardTheme.light,
-      bottomSheetTheme: TnyxSheetTheme.light,
-      navigationBarTheme: TnyxNavigationTheme.light,
-      inputDecorationTheme: TnyxInputTheme.light,
-      textTheme: TnyxTypography.textTheme,
-    );
-  }
+  TnyxTheme._();
 
-  // [TAG: DARK SCHEMA SPECIFICATION]
-  static ThemeData get darkTheme {
+  static final ColorScheme fallbackLightScheme = ColorScheme.fromSeed(
+    seedColor: TnyxColors.brandPrimary,
+    brightness: Brightness.light,
+  ).copyWith(
+    primary: TnyxColors.brandPrimary,
+    surface: TnyxColors.lightBackground,
+  );
+
+  static final ColorScheme fallbackDarkScheme = ColorScheme.fromSeed(
+    seedColor: TnyxColors.brandPrimary,
+    brightness: Brightness.dark,
+  ).copyWith(
+    primary: TnyxColors.brandPrimary,
+  );
+
+  static ThemeData buildTheme(ColorScheme colorScheme) {
+    final isDark = colorScheme.brightness == Brightness.dark;
+
+    // Harmonizing the scheme with our main brand color
+    final finalScheme = colorScheme.copyWith(
+      primary: TnyxColors.brandPrimary,
+      onPrimary: TnyxColors.brandOnPrimary,
+    );
+
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.dark,
-      colorScheme: const ColorScheme.dark(
-        primary: TnyxColors.darkHighContrastText,
-        onPrimary: TnyxColors.darkCanvasBackground,
-        secondary: TnyxColors.actionCore,
-        onSecondary: TnyxColors.lightCanvasBackground,
-        primaryContainer: TnyxColors.darkPrimaryContainer, // Using the Blue color here
-        
-        surface: TnyxColors.darkCanvasBackground,
-        onSurface: TnyxColors.darkHighContrastText,
-        surfaceContainer: TnyxColors.darkSurfaceContainer,
-        onSurfaceVariant: TnyxColors.darkLowContrastText,
-        
-        outline: TnyxColors.darkComponentOutline,
-        outlineVariant: TnyxColors.darkComponentOutline,
-        
-        error: TnyxColors.alertCritical,
-        onError: TnyxColors.darkOnSystemState,
-        errorContainer: TnyxColors.alertWarning,
-        onErrorContainer: TnyxColors.darkOnSystemWarning,
-        
-        tertiary: TnyxColors.alertSuccess,
-        onTertiary: TnyxColors.darkOnSystemState,
+      colorScheme: finalScheme,
+      scaffoldBackgroundColor: finalScheme.surface,
+      cardColor: finalScheme.surfaceContainer,
+      
+      appBarTheme: isDark ? TnyxAppBarTheme.dark : TnyxAppBarTheme.light,
+      cardTheme: isDark ? TnyxCardTheme.dark : TnyxCardTheme.light,
+      bottomSheetTheme: isDark ? TnyxSheetTheme.dark : TnyxSheetTheme.light,
+      navigationBarTheme: isDark ? TnyxNavigationTheme.dark : TnyxNavigationTheme.light,
+      inputDecorationTheme: isDark ? TnyxInputTheme.dark : TnyxInputTheme.light,
+      filledButtonTheme: isDark ? TnyxButtonTheme.filledDark : TnyxButtonTheme.filledLight,
+      outlinedButtonTheme: isDark ? TnyxButtonTheme.outlinedDark : TnyxButtonTheme.outlinedLight,
+      textButtonTheme: isDark ? TnyxButtonTheme.textDark : TnyxButtonTheme.textLight,
+
+      textTheme: TnyxTypography.textTheme.apply(
+        bodyColor: finalScheme.onSurface,
+        displayColor: finalScheme.onSurface,
+      ).copyWith(
+        titleLarge: TnyxTypography.textTheme.titleLarge?.copyWith(
+          color: finalScheme.onSurface,
+          fontWeight: FontWeight.w600,
+        ),
       ),
-      scaffoldBackgroundColor: TnyxColors.darkCanvasBackground,
-      appBarTheme: TnyxAppBarTheme.dark,
-      cardTheme: TnyxCardTheme.dark,
-      bottomSheetTheme: TnyxSheetTheme.dark,
-      navigationBarTheme: TnyxNavigationTheme.dark,
-      inputDecorationTheme: TnyxInputTheme.dark,
-      textTheme: TnyxTypography.textTheme,
     );
   }
 }

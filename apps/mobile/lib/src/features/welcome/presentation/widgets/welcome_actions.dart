@@ -54,10 +54,10 @@ class WelcomeSecondaryButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: colors.onSurface.withValues(alpha: TnyxDimens.opacityGlass),
+          backgroundColor: colors.onSurface.withOpacity(TnyxDimens.opacityGlass),
           foregroundColor: colors.onSurface,
           side: BorderSide(
-            color: colors.primary.withValues(alpha: TnyxDimens.opacityGlassBorder),
+            color: colors.primary.withOpacity(TnyxDimens.opacityGlassBorder),
             width: TnyxDimens.borderThin,
           ),
           shape: RoundedRectangleBorder(

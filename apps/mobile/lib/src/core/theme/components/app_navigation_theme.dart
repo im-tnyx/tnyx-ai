@@ -19,9 +19,7 @@ sealed class TnyxNavigationTheme {
     elevation: TnyxDimens.elevationNone,
 
     indicatorColor:
-    TnyxColors.brandPrimary.withValues(
-      alpha: 0.12,
-    ),
+    TnyxColors.brandPrimary.withOpacity(0.12),
 
     iconTheme: WidgetStateProperty.resolveWith(
           (states) {
@@ -73,9 +71,7 @@ sealed class TnyxNavigationTheme {
     elevation: TnyxDimens.elevationNone,
 
     indicatorColor:
-    TnyxColors.brandPrimary.withValues(
-      alpha: 0.18,
-    ),
+    TnyxColors.brandPrimary.withOpacity(0.18),
 
     iconTheme: WidgetStateProperty.resolveWith(
           (states) {

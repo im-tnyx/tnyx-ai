@@ -21,10 +21,10 @@ class WelcomeFeatureTile extends StatelessWidget {
       height: TnyxDimens.featureTileHeight,
       padding: const EdgeInsets.symmetric(horizontal: TnyxDimens.spaceS),
       decoration: BoxDecoration(
-        color: theme.colorScheme.onSurface.withValues(alpha: TnyxDimens.opacityGlass),
+        color: theme.colorScheme.onSurface.withOpacity(TnyxDimens.opacityGlass),
         borderRadius: BorderRadius.circular(TnyxDimens.radiusL),
         border: Border.all(
-          color: theme.colorScheme.primary.withValues(alpha: TnyxDimens.opacitySubtle),
+          color: theme.colorScheme.primary.withOpacity(TnyxDimens.opacitySubtle),
           width: TnyxDimens.borderSubtle,
         ),
       ),
@@ -34,7 +34,7 @@ class WelcomeFeatureTile extends StatelessWidget {
             width: TnyxDimens.featureTileIconContainerSize,
             height: TnyxDimens.featureTileIconContainerSize,
             decoration: BoxDecoration(
-              color: theme.colorScheme.primary.withValues(alpha: TnyxDimens.opacityLow),
+              color: theme.colorScheme.primary.withOpacity(TnyxDimens.opacityLow),
               borderRadius: BorderRadius.circular(TnyxDimens.radiusFeatureIcon),
             ),
             child: Icon(
@@ -59,7 +59,7 @@ class WelcomeFeatureTile extends StatelessWidget {
           ),
           Icon(
             Icons.chevron_right_rounded,
-            color: theme.colorScheme.onSurface.withValues(alpha: TnyxDimens.opacityMuted),
+            color: theme.colorScheme.onSurface.withOpacity(TnyxDimens.opacityMuted),
             size: TnyxDimens.iconSizeS,
           ),
         ],

@@ -25,8 +25,8 @@ class MainBottomNav extends StatelessWidget {
 
     // Premium Glass Effect: Color with Alpha based on theme
     final navBackground = isDark
-        ? TnyxColors.bottomNavBackground.withValues(alpha: 0.65)
-        : colors.surfaceContainer.withValues(alpha: 0.8);
+        ? TnyxColors.bottomNavBackground.withOpacity(0.65)
+        : colors.surfaceContainer.withOpacity(0.8);
 
     return Container(
       margin: EdgeInsets.fromLTRB(
@@ -39,7 +39,7 @@ class MainBottomNav extends StatelessWidget {
         borderRadius: BorderRadius.circular(TnyxDimens.radiusPill),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: TnyxDimens.opacitySubtle),
+            color: Colors.black.withOpacity(TnyxDimens.opacitySubtle),
             blurRadius: TnyxDimens.bottomNavShadowBlur,
             offset: const Offset(0, TnyxDimens.bottomNavShadowOffsetY),
           ),
@@ -58,7 +58,7 @@ class MainBottomNav extends StatelessWidget {
               color: navBackground,
               borderRadius: BorderRadius.circular(TnyxDimens.radiusPill),
               border: Border.all(
-                color: colors.onSurface.withValues(alpha: isDark ? 0.08 : 0.12),
+                color: colors.onSurface.withOpacity(isDark ? 0.08 : 0.12),
                 width: 1,
               ),
             ),
@@ -83,7 +83,7 @@ class MainBottomNav extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.all(2),
                           decoration: BoxDecoration(
-                            color: colors.onSurface.withValues(alpha: 0.1),
+                            color: colors.onSurface.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(TnyxDimens.radiusBottomNavSelection),
                           ),
                         ),
@@ -167,14 +167,14 @@ class _NavIcon extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: isSelected ? colors.onSurface : colors.onSurface.withValues(alpha: 0.5),
+                color: isSelected ? colors.onSurface : colors.onSurface.withOpacity(0.5),
                 size: TnyxDimens.bottomBarIcon,
               ),
               const SizedBox(height: 1),
               Text(
                 label,
                 style: TextStyle(
-                  color: isSelected ? colors.onSurface : colors.onSurface.withValues(alpha: 0.5),
+                  color: isSelected ? colors.onSurface : colors.onSurface.withOpacity(0.5),
                   fontSize: TnyxDimens.bottomNavLabelFontSize,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),

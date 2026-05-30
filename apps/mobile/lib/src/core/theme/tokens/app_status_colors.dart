@@ -16,9 +16,9 @@ class AppStatusColors {
 extension AppStatusColorsExtension on BuildContext {
   AppStatusColors get statusColors {
     return const AppStatusColors(
-      success: TnyxColors.alertSuccess,
-      warning: TnyxColors.alertWarning,
-      error: TnyxColors.alertCritical,
+      success: TnyxColors.success,
+      warning: TnyxColors.warning,
+      error: TnyxColors.error,
     );
   }
 }

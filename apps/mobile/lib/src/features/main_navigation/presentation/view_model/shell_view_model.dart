@@ -23,7 +23,7 @@ class ShellViewModel extends ChangeNotifier {
   }
 
   void _handleScroll(double offset) {
-    const threshold = 200.0;
+    const threshold = 280.0;
     final double opacity = (offset / threshold).clamp(0.0, 1.0);
     
     if (_uiState.appBarOpacity != opacity) {

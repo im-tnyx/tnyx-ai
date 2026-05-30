@@ -35,9 +35,9 @@ class MainTopBar extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            themeColor.withValues(alpha: 1.0),
-            themeColor.withValues(alpha: 0.95),
-            themeColor.withValues(alpha: 0.0),
+            themeColor.withOpacity(1.0),
+            themeColor.withOpacity(0.85),
+            themeColor.withOpacity(0.0),
           ],
           stops: const [
             0.0,
@@ -78,10 +78,10 @@ class MainTopBar extends StatelessWidget {
                   vertical: TnyxDimens.spaceXXS,
                 ),
                 decoration: BoxDecoration(
-                  color: colors.primary.withValues(alpha: 0.1),
+                  color: colors.primary.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(TnyxDimens.radiusPremiumBox),
                   border: Border.all(
-                    color: colors.primary.withValues(alpha: 0.3),
+                    color: colors.primary.withOpacity(0.3),
                     width: TnyxDimens.borderThin,
                   ),
                 ),
@@ -121,7 +121,7 @@ class MainTopBar extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: colors.onSurface.withValues(alpha: 0.2),
+                        color: colors.onSurface.withOpacity(0.2),
                         width: 1.0,
                       ),
                     ),
@@ -129,7 +129,7 @@ class MainTopBar extends StatelessWidget {
                       width: TnyxDimens.topBarItemSize - 5,
                       height: TnyxDimens.topBarItemSize - 5,
                       decoration: BoxDecoration(
-                        color: colors.onSurface.withValues(alpha: 0.1),
+                        color: colors.onSurface.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
@@ -148,7 +148,7 @@ class MainTopBar extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: colors.onSurface.withValues(alpha: 0.2),
+                        color: colors.onSurface.withOpacity(0.2),
                         width: 1.0,
                       ),
                     ),
@@ -156,7 +156,7 @@ class MainTopBar extends StatelessWidget {
                       width: TnyxDimens.topBarItemSize - 5,
                       height: TnyxDimens.topBarItemSize - 5,
                       decoration: BoxDecoration(
-                        color: colors.onSurface.withValues(alpha: 0.1),
+                        color: colors.onSurface.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(

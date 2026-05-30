@@ -21,9 +21,7 @@ sealed class TnyxSheetTheme {
     showDragHandle: true,
 
     dragHandleColor:
-    TnyxColors.lightTextMuted.withValues(
-      alpha: 0.50,
-    ),
+    TnyxColors.lightTextMuted.withOpacity(0.50),
 
     dragHandleSize: const Size(
       TnyxDimens.sheetHandleWidth,
@@ -52,9 +50,7 @@ sealed class TnyxSheetTheme {
     showDragHandle: true,
 
     dragHandleColor:
-    TnyxColors.darkTextMuted.withValues(
-      alpha: 0.50,
-    ),
+    TnyxColors.darkTextMuted.withOpacity(0.50),
 
     dragHandleSize: const Size(
       TnyxDimens.sheetHandleWidth,

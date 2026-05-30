@@ -79,7 +79,7 @@ class LegalDocumentScreen extends StatelessWidget {
                               color: colors.surface,
                               borderRadius: BorderRadius.circular(24),
                               border: Border.all(
-                                color: colors.outline.withValues(alpha: 0.22),
+                                color: colors.outline.withOpacity(0.22),
                               ),
                             ),
                             child: Column(
@@ -127,14 +127,12 @@ class LegalDocumentScreen extends StatelessWidget {
                                     color: statusColors.error,
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
-                                      color: colors.outline.withValues(alpha: 0.35),
+                                      color: colors.outline.withOpacity(0.35),
                                       width: 1.5,
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: statusColors.error.withValues(
-                                          alpha: 0.35,
-                                        ),
+                                        color: statusColors.error.withOpacity(0.35),
                                         blurRadius: 10,
                                         offset: const Offset(0, 2),
                                       ),
@@ -297,10 +295,10 @@ class _LegalPlaceholderContent extends StatelessWidget {
           Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: colors.surfaceContainer.withValues(alpha: 0.25),
+              color: colors.surfaceContainer.withOpacity(0.25),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: colors.outline.withValues(alpha: 0.35),
+                color: colors.outline.withOpacity(0.35),
                 width: 1.2,
               ),
             ),

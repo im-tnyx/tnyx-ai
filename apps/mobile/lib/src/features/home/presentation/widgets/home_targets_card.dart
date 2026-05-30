@@ -18,7 +18,7 @@ class HomeTargetsCard extends StatelessWidget {
         color: colors.surfaceContainer,
         borderRadius: BorderRadius.circular(TnyxDimens.radiusXL),
         border: Border.all(
-          color: colors.onSurface.withValues(alpha: isDark ? 0.08 : 0.05),
+          color: colors.onSurface.withOpacity(isDark ? 0.08 : 0.05),
           width: 1,
         ),
       ),
@@ -39,7 +39,7 @@ class HomeTargetsCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
-                  color: colors.onSurface.withValues(alpha: 0.05),
+                  color: colors.onSurface.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(TnyxDimens.radiusL),
                 ),
                 child: RichText(
@@ -55,7 +55,7 @@ class HomeTargetsCard extends StatelessWidget {
                       TextSpan(
                         text: '/7',
                         style: theme.textTheme.titleMedium?.copyWith(
-                          color: colors.onSurface.withValues(alpha: 0.4),
+                          color: colors.onSurface.withOpacity(0.4),
                         ),
                       ),
                     ],
@@ -111,15 +111,15 @@ class _TargetIcon extends StatelessWidget {
           height: 44,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: colors.onSurface.withValues(alpha: 0.03),
+            color: colors.onSurface.withOpacity(0.03),
             border: Border.all(
-              color: colors.onSurface.withValues(alpha: 0.08),
+              color: colors.onSurface.withOpacity(0.08),
             ),
           ),
           child: Icon(
             icon,
             size: 20,
-            color: colors.onSurface.withValues(alpha: 0.8),
+            color: colors.onSurface.withOpacity(0.8),
           ),
         ),
         if (badge != null)
@@ -133,7 +133,7 @@ class _TargetIcon extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: [
                   BoxShadow(
-                    color: (badgeColor ?? Colors.purple).withValues(alpha: 0.4),
+                    color: (badgeColor ?? Colors.purple).withOpacity(0.4),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),

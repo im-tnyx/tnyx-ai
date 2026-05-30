@@ -52,6 +52,7 @@ class TnyxDimens {
   static const double sheetHandleHeight = 4.0;
   static const double sheetHandleWidth = 40.0;
   static const double topBarItemSize = 38.0;
+  static const double progressBarHeight = 8.0;
   
   // Icons
   static const double iconSizeXXS = 12.0;

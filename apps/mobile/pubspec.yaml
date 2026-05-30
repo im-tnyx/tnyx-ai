@@ -12,6 +12,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
   webview_flutter: ^4.10.0
+  intl: ^0.19.0
+  dynamic_color: ^1.7.0
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +48,14 @@ flutter:
         - asset: assets/fonts/NotoSansDevanagari-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/NotoSansDevanagari-Bold.ttf
+          weight: 700
+    - family: SFPro
+      fonts:
+        - asset: assets/fonts/SF-Pro-Rounded-Regular.otf
+          weight: 400
+        - asset: assets/fonts/SF-Pro-Rounded-Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
           weight: 700
 
 flutter_launcher_icons:

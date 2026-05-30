@@ -79,7 +79,7 @@ class _LanguageBottomSheetState extends State<_LanguageBottomSheet> {
             Text(
               widget.subtitle,
               style: textTheme.bodyLarge?.copyWith(
-                color: colors.onSurface.withValues(alpha: 0.7),
+                color: colors.onSurface.withOpacity(0.7),
               ),
             ),
             const SizedBox(height: 16),
@@ -106,11 +106,6 @@ class _LanguageBottomSheetState extends State<_LanguageBottomSheet> {
               height: TnyxDimens.buttonHeightLarge,
               child: FilledButton(
                 onPressed: () => Navigator.of(context).pop(_selectedLanguage),
-                style: FilledButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(TnyxDimens.radiusButton),
-                  ),
-                ),
                 child: const Text('Apply'),
               ),
             ),
@@ -149,7 +144,7 @@ class _LanguageOptionTile extends StatelessWidget {
             width: isSelected ? 1.5 : 1,
           ),
           color: isSelected
-              ? colors.primaryContainer.withValues(alpha: 0.05)
+              ? colors.primaryContainer.withOpacity(0.05)
               : Colors.transparent,
         ),
         child: Row(

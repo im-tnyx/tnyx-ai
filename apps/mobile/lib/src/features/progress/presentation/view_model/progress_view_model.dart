@@ -7,5 +7,16 @@ class ProgressViewModel extends ChangeNotifier {
   ProgressUiState get uiState => _uiState;
 
   void onAction(ProgressAction action) {
+    switch (action) {
+      case ProgressTabSelected(tab: final tab):
+        _selectTab(tab);
+        break;
+    }
+  }
+
+  void _selectTab(ProgressTab tab) {
+    if (_uiState.selectedTab == tab) return;
+    _uiState = _uiState.copyWith(selectedTab: tab);
+    notifyListeners();
   }
 }

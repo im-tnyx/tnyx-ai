@@ -18,9 +18,9 @@ class WelcomeBackdrop extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  themeColor.withValues(alpha: 0.18),
-                  themeColor.withValues(alpha: 0.08),
-                  themeColor.withValues(alpha: 0.0),
+                  themeColor.withOpacity(0.18),
+                  themeColor.withOpacity(0.08),
+                  themeColor.withOpacity(0.0),
                 ],
                 stops: const [
                   0.0,
@@ -36,23 +36,23 @@ class WelcomeBackdrop extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: FractionallySizedBox(
             widthFactor: 1,
-            heightFactor: 0.80,
+            heightFactor: 0.85,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    themeColor.withValues(alpha: 0.0),
-                    themeColor.withValues(alpha: 0.50),
-                    themeColor.withValues(alpha: 1.0),
-                    themeColor.withValues(alpha: 1.0),
-                    themeColor.withValues(alpha: 1.0),
-                    themeColor.withValues(alpha: 1.0),
+                    themeColor.withOpacity(0.0),
+                    themeColor.withOpacity(0.30),
+                    themeColor.withOpacity(1.0),
+                    themeColor.withOpacity(1.0),
+                    themeColor.withOpacity(1.0),
+                    themeColor.withOpacity(1.0),
                   ],
                   stops: const [
                     0.0,
-                    0.25,
+                    0.20,
                     0.30,
                     0.65,
                     0.75,
